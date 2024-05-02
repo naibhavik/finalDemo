@@ -48,10 +48,10 @@ const Login: React.FC = () => {
     }
   };
 
-  if (isAuthorized) {
-    router.push("/"); // Redirect to home page if already authorized
-    return null;
-  }
+  // if (isAuthorized) {
+  //   router.push("/"); // Redirect to home page if already authorized
+  //   return null;
+  // }
 
   return (
     <>

@@ -72,7 +72,7 @@ const Application: React.FC<ApplicationProps> = (props) => {
   };
 
   if (!isAuthorized || (user && user.role === "Employer")) {
-    router.push("/");
+    router.push("/login");
     return null;
   }
 
@@ -167,10 +167,6 @@ const Application: React.FC<ApplicationProps> = (props) => {
               accept=".pdf, .jpg, .png"
               onChange={handleFileChange}
               style={{ width: "100%" }}
-              variant="outlined"
-              sx={{
-                "& > :not(style)": { mr: 1, mt: 1 },
-              }}
             />
           </div>
           <br></br>

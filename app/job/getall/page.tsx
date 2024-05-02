@@ -4,6 +4,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Context } from "@/app/layout";
+import ScrollTop from "@/components/NewJob/scrollTop";
 
 interface Job {
   _id: string;
@@ -141,6 +142,7 @@ const Jobs: React.FC = () => {
           </div>
         </div>
       </section>
+      <ScrollTop/>
     </>
   );
 };

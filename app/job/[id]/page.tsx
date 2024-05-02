@@ -54,7 +54,7 @@ const JobDetails: React.FC<Props> = (props) => {
 
   useEffect(() => {
     if (!isAuthorized) {
-      router.push("/");
+      router.push("/login");
     }
   }, [isAuthorized]);
 
@@ -151,9 +151,14 @@ const JobDetails: React.FC<Props> = (props) => {
               {user && user.role === "Employer" ? (
                 <></>
               ) : (
-                <button className="mt-3 text-white bg-black h-9 w-24 rounded-lg">
-                  <Link href={`/application/${job._id}`}>Apply Now</Link>
-                </button>
+                // <button className="mt-3 text-white bg-black h-9 w-24 rounded-lg">
+                <Link
+                  className="mt-3 text-white bg-black h-9 w-24 rounded-md"
+                  href={`/application/${job._id}`}
+                >
+                  Apply Now
+                </Link>
+                // </button>
               )}
             </div>
           </div>

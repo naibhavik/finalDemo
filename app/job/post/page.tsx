@@ -31,7 +31,7 @@ const PostJob: React.FC = () => {
   const [category, setCategory] = useState<string>("");
   const [country, setCountry] = useState<string>("");
   const [city, setCity] = useState<string>("");
-   const [experience, setExperience] = useState<string>("");
+  const [experience, setExperience] = useState<string>("");
 
   const [location, setLocation] = useState<string>("");
   const [salaryFrom, setSalaryFrom] = useState<string>("");
@@ -104,7 +104,7 @@ const PostJob: React.FC = () => {
         }
       );
       toast.success(res.data.message);
-      router.push("/"); // Redirect to home after successful post
+      router.push("/job/post"); // Redirect to home after successful post
     } catch (err: any) {
       toast.error(err.response.data.message);
       console.log("this is error", err);
@@ -112,8 +112,8 @@ const PostJob: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!isAuthorized || (user && user.role !== "Employer")) {
-      router.push("/");
+    if (!isAuthorized) {
+      router.push("/login");
     }
   }, [isAuthorized, user, router]);
 

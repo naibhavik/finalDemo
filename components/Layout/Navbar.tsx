@@ -15,7 +15,8 @@ const Navbar: React.FC = () => {
   const [show, setShow] = useState<boolean>(false);
   const { isAuthorized, setIsAuthorized, user, setUser }: any =
     useContext(Context);
-  const myuser = useSelector((state: any) => state.getUser);
+  const myuser = useSelector((state: any) => state.user);
+  setUser(myuser);
   console.log("this is my user", myuser);
   const router = useRouter();
   // const fetchUser = async () => {
@@ -49,8 +50,8 @@ const Navbar: React.FC = () => {
           withCredentials: true,
         }
       );
-      toast.success(response.data.message);
       localStorage.setItem("isAuthorized", "false");
+      toast.success(response.data.message);
       setIsAuthorized(false);
       router.push("/login");
     } catch (error: any) {

@@ -23,6 +23,8 @@ const userSlice = createSlice({
     addUserSuccess: (state, action: PayloadAction<any>) => {
       state.isLoading = false;
       console.log("YYYYYYY");
+      console.log("====",action.payload);
+      
       state.user = action.payload;
     },
     addUserFailure: (state) => {

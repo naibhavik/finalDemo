@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState, useEffect, useContext, FormEvent } from "react";
 import io from "socket.io-client";
@@ -9,7 +9,7 @@ interface Message {
   message: string;
   user: string;
   time: string;
-  roomId:string;
+  roomId: string;
 }
 
 const socket = io("http://localhost:4000");
@@ -75,6 +75,26 @@ const Chatapp: React.FC = () => {
 
   return (
     <>
+      <section
+        className="bg-half-170 d-table w-100"
+        style={{
+          backgroundImage: "url('/images/hero/bg2.jpg')",
+          backgroundPosition: "top",
+        }}
+      >
+        <div className="bg-overlay bg-gradient-overlay"></div>
+        <div className="container">
+          <div className="row mt-5 justify-content-center">
+            <div className="col-12">
+              <div className="title-heading text-center">
+                <h5 className="heading fw-semibold mb-0 sub-heading text-white title-dark">
+                  Chating App
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <h1>ChatApp</h1>
       <div className="chatapp bg-blue-100">
         <p>
@@ -94,7 +114,7 @@ const Chatapp: React.FC = () => {
               {messages.map((message: Message, index: number) => (
                 <div
                   key={index}
-                  className={`flex rounded-md shadow-md my-5 ${
+                  className={`flex rounded-md shadow-sm my-5 ${
                     username === message.user ? "justify-end" : "justify-start"
                   }`}
                 >
@@ -108,7 +128,7 @@ const Chatapp: React.FC = () => {
                   <div className={`px-2 bg--200 rounded-md`}>
                     <span className="text-sm">{message.user}</span>
                     <h3 className="font-bold">{message.message}</h3>
-                    <h3 className="text-xs text-right">{message.time}</h3>
+                    <span className="text-sm font-bold">{message.time}</span>
                   </div>
                 </div>
               ))}
