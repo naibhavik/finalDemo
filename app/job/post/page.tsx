@@ -31,6 +31,8 @@ const PostJob: React.FC = () => {
   const [category, setCategory] = useState<string>("");
   const [country, setCountry] = useState<string>("");
   const [city, setCity] = useState<string>("");
+   const [experience, setExperience] = useState<string>("");
+
   const [location, setLocation] = useState<string>("");
   const [salaryFrom, setSalaryFrom] = useState<string>("");
   const [salaryTo, setSalaryTo] = useState<string>("");
@@ -80,6 +82,7 @@ const PostJob: React.FC = () => {
         category,
         country,
         city,
+        experience,
         location,
       };
 
@@ -116,7 +119,7 @@ const PostJob: React.FC = () => {
 
   return (
     <>
-    <section
+      <section
         className="bg-half-170 d-table w-100"
         style={{
           backgroundImage: "url('/images/hero/bg.jpg')",
@@ -136,185 +139,201 @@ const PostJob: React.FC = () => {
           </div>
         </div>
       </section>
-    <Container className="mt-10 mb-20">
-      <Typography variant="h3" className="text-center" gutterBottom>
-        Post New Job
-      </Typography>
-      <form onSubmit={handleJobPost} className="mt-5">
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
-            <TextField
-              fullWidth
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              label="Job Title"
-              variant="outlined"
-              sx={{
-                "& > :not(style)": { mr: 1, mt: 1 },
-              }}
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <FormControl fullWidth variant="outlined">
-              <InputLabel>Select Category</InputLabel>
-              <Select
-                value={category}
-                onChange={(e) => setCategory(e.target.value as string)}
-                sx={{
-                  "& > :not(style)": { mr: 1, mt: 1 },
-                }}
-              >
-                <MenuItem value="">Select Category</MenuItem>
-                <MenuItem value="Graphics & Design">Graphics & Design</MenuItem>
-                <MenuItem value="Mobile App Development">
-                  Mobile App Development
-                </MenuItem>
-                <MenuItem value="Web Development">Web Development</MenuItem>
-              </Select>
-              {category === "" && (
-                <FormHelperText>Please select a category</FormHelperText>
-              )}
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <TextField
-              fullWidth
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
-              label="Country"
-              variant="outlined"
-              sx={{
-                "& > :not(style)": { mr: 1, mt: 1 },
-              }}
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <TextField
-              fullWidth
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              label="City"
-              variant="outlined"
-              sx={{
-                "& > :not(style)": { mr: 1, mt: 1 },
-              }}
-              />
-          </Grid>
-          <Grid item xs={12}>
-            <Autocomplete
-              fullWidth
-              value={location}
-              onChange={(event: any, newValue: string | null) => {
-                setLocation(newValue || "");
-              }}
-              inputValue={location}
-              onInputChange={(event, newInputValue) => {
-                setLocation(newInputValue);
-                fetchLocationSuggestions(newInputValue);
-              }}
-              options={locationSuggestions.map((option) => option.description)}
-              renderInput={(params) => (
-                <TextField
-                {...params}
-                label="Location"
-                  variant="outlined"
-                  sx={{
-                    "& > :not(style)": { mr: 1, mt: 1 },
-                  }}
-                />
-              )}
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <FormControl fullWidth>
-              <Select
-                value={salaryType}
-                onChange={(e) => setSalaryType(e.target.value as string)}
-                sx={{
-                  "& > :not(style)": { mr: 1, mt: 1 },
-                }}
-                >
-                <MenuItem value="default">Select Salary Type</MenuItem>
-                <MenuItem value="Fixed Salary">Fixed Salary</MenuItem>
-                <MenuItem value="Ranged Salary">Ranged Salary</MenuItem>
-              </Select>
-              {salaryType === "default" && (
-                <FormHelperText>Please select a salary type</FormHelperText>
-              )}
-            </FormControl>
-          </Grid>
-          {salaryType === "Fixed Salary" && (
-            <Grid item xs={12}>
+      <Container className="mt-10 mb-20">
+        <Typography variant="h3" className="text-center" gutterBottom>
+          Post New Job
+        </Typography>
+        <form onSubmit={handleJobPost} className="mt-5">
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
-                value={fixedSalary}
-                onChange={(e) => setFixedSalary(e.target.value)}
-                label="Fixed Salary"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                label="Job Title"
                 variant="outlined"
                 sx={{
                   "& > :not(style)": { mr: 1, mt: 1 },
                 }}
               />
             </Grid>
-          )}
-          {salaryType === "Ranged Salary" && (
-            <>
-              <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6}>
+              <FormControl fullWidth variant="outlined">
+                <InputLabel>Select Category</InputLabel>
+                <Select
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value as string)}
+                  sx={{
+                    "& > :not(style)": { mr: 1, mt: 1 },
+                  }}
+                >
+                  <MenuItem value="">Select Category</MenuItem>
+                  <MenuItem value="Graphics & Design">
+                    Graphics & Design
+                  </MenuItem>
+                  <MenuItem value="Mobile App Development">
+                    Mobile App Development
+                  </MenuItem>
+                  <MenuItem value="Web Development">Web Development</MenuItem>
+                </Select>
+                {category === "" && (
+                  <FormHelperText>Please select a category</FormHelperText>
+                )}
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                fullWidth
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                label="Country"
+                variant="outlined"
+                sx={{
+                  "& > :not(style)": { mr: 1, mt: 1 },
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                fullWidth
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                label="City"
+                variant="outlined"
+                sx={{
+                  "& > :not(style)": { mr: 1, mt: 1 },
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                fullWidth
+                value={experience}
+                onChange={(e) => setExperience(e.target.value)}
+                label="Experience"
+                variant="outlined"
+                sx={{
+                  "& > :not(style)": { mr: 1, mt: 1 },
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Autocomplete
+                fullWidth
+                value={location}
+                onChange={(event: any, newValue: string | null) => {
+                  setLocation(newValue || "");
+                }}
+                inputValue={location}
+                onInputChange={(event, newInputValue) => {
+                  setLocation(newInputValue);
+                  fetchLocationSuggestions(newInputValue);
+                }}
+                options={locationSuggestions.map(
+                  (option) => option.description
+                )}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Location"
+                    variant="outlined"
+                    sx={{
+                      "& > :not(style)": { mr: 1, mt: 1 },
+                    }}
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <FormControl fullWidth>
+                <Select
+                  value={salaryType}
+                  onChange={(e) => setSalaryType(e.target.value as string)}
+                  sx={{
+                    "& > :not(style)": { mr: 1, mt: 1 },
+                  }}
+                >
+                  <MenuItem value="default">Select Salary Type</MenuItem>
+                  <MenuItem value="Fixed Salary">Fixed Salary</MenuItem>
+                  <MenuItem value="Ranged Salary">Ranged Salary</MenuItem>
+                </Select>
+                {salaryType === "default" && (
+                  <FormHelperText>Please select a salary type</FormHelperText>
+                )}
+              </FormControl>
+            </Grid>
+            {salaryType === "Fixed Salary" && (
+              <Grid item xs={12}>
                 <TextField
                   fullWidth
-                  value={salaryFrom}
-                  onChange={(e) => setSalaryFrom(e.target.value)}
-                  label="Salary From"
+                  value={fixedSalary}
+                  onChange={(e) => setFixedSalary(e.target.value)}
+                  label="Fixed Salary"
                   variant="outlined"
                   sx={{
                     "& > :not(style)": { mr: 1, mt: 1 },
                   }}
-                  />
+                />
               </Grid>
-              <Grid item xs={12} md={6}>
-                <TextField
-                  fullWidth
-                  value={salaryTo}
-                  onChange={(e) => setSalaryTo(e.target.value)}
-                  label="Salary To"
-                  variant="outlined"
-                  sx={{
-                    "& > :not(style)": { mr: 1, mt: 1 },
-                  }}
+            )}
+            {salaryType === "Ranged Salary" && (
+              <>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    fullWidth
+                    value={salaryFrom}
+                    onChange={(e) => setSalaryFrom(e.target.value)}
+                    label="Salary From"
+                    variant="outlined"
+                    sx={{
+                      "& > :not(style)": { mr: 1, mt: 1 },
+                    }}
                   />
-              </Grid>
-            </>
-          )}
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              multiline
-              rows={5}
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              label="Job Description"
-              variant="outlined"
-              sx={{
-                "& > :not(style)": { mr: 1, mt: 1 },
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              sx={{
-                "& > :not(style)": { m: 1 },
-              }}
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    fullWidth
+                    value={salaryTo}
+                    onChange={(e) => setSalaryTo(e.target.value)}
+                    label="Salary To"
+                    variant="outlined"
+                    sx={{
+                      "& > :not(style)": { mr: 1, mt: 1 },
+                    }}
+                  />
+                </Grid>
+              </>
+            )}
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                multiline
+                rows={5}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                label="Job Description"
+                variant="outlined"
+                sx={{
+                  "& > :not(style)": { mr: 1, mt: 1 },
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                sx={{
+                  "& > :not(style)": { m: 1 },
+                }}
               >
-              Create Job
-            </Button>
+                Create Job
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
-      </form>
-    </Container>
-  </>
+        </form>
+      </Container>
+    </>
   );
 };
 

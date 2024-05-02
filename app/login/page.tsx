@@ -13,9 +13,9 @@ import { useRouter } from "next/navigation";
 import { Context } from "../layout";
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [role, setRole] = useState<string>("");
+  const [email, setEmail] = useState<string>("naibhavik68@gmail.com");
+  const [password, setPassword] = useState<string>("Bhavik@123");
+  const [role, setRole] = useState<string>("Employer");
   const router = useRouter();
 
   const { isAuthorized, setIsAuthorized }: any = useContext(Context);
@@ -37,8 +37,8 @@ const Login: React.FC = () => {
       setEmail("");
       setPassword("");
       setRole("");
-      setIsAuthorized(true);
       const mylocal = localStorage.setItem("isAuthorized", "true");
+      setIsAuthorized(true);
       console.log("local", mylocal);
 
       router.push("/"); // Redirect to home page after successful login

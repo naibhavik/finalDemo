@@ -14,6 +14,7 @@ interface Job {
   category: string;
   country: string;
   city: string;
+  experience:string;
   location: string;
   fixedSalary?: string;
   salaryFrom?: string;
@@ -117,7 +118,6 @@ const MyJobs: React.FC = () => {
 
   return (
     <>
-    
       <div className="myJobs page">
         <div className="container">
           <h1 className="header">Your Posted Jobs</h1>
@@ -168,6 +168,21 @@ const MyJobs: React.FC = () => {
                               handleInputChange(
                                 element._id,
                                 "city",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                        <div>
+                          <span>Experience:</span>
+                          <input
+                            type="text"
+                            disabled={editingMode !== element._id}
+                            value={element.experience}
+                            onChange={(e) =>
+                              handleInputChange(
+                                element._id,
+                                "experience",
                                 e.target.value
                               )
                             }

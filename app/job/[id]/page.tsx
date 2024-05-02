@@ -13,6 +13,7 @@ interface Job {
   country: string;
   city: string;
   location: string;
+  experience: string;
   description: string;
   jobPostedOn: string;
   fixedSalary?: number;
@@ -106,7 +107,7 @@ const JobDetails: React.FC<Props> = (props) => {
           </div>
 
           <div className="job-details-container mt-5 mb-10 gap-8">
-            <div className="job-details-content">
+            <div className="job-post job-post-list rounded shadow p-4 ">
               <Typography>
                 <span className="bold">Title:</span> <span>{job.title}</span>
               </Typography>
@@ -120,6 +121,10 @@ const JobDetails: React.FC<Props> = (props) => {
               </Typography>
               <Typography>
                 <span className="bold">City:</span> <span>{job.city}</span>
+              </Typography>
+              <Typography>
+                <span className="bold">Experience:</span>{" "}
+                <span>{job.experience}</span>
               </Typography>
               <Typography>
                 <span className="bold">Location:</span>{" "}

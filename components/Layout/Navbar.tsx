@@ -9,34 +9,37 @@ import axios from "axios";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Context } from "@/app/layout";
 import Image from "next/image";
+import { useSelector } from "react-redux";
 
 const Navbar: React.FC = () => {
   const [show, setShow] = useState<boolean>(false);
   const { isAuthorized, setIsAuthorized, user, setUser }: any =
     useContext(Context);
+  const myuser = useSelector((state: any) => state.getUser);
+  console.log("this is my user", myuser);
   const router = useRouter();
-  const fetchUser = async () => {
-    try {
-      const response = await axios.get<{ user: any }>(
-        "http://localhost:4000/api/v1/user/getuser",
-        {
-          withCredentials: true,
-        }
-      );
-      setUser(response.data.user);
-      console.log("user data", response.data.user);
-      setIsAuthorized(true);
-    } catch (error) {
-      setIsAuthorized(false);
-    }
-  };
-  useEffect(() => {
-    if (isAuthorized) {
-      fetchUser();
-    } else {
-      router.push("/login");
-    }
-  }, [isAuthorized, setUser, setIsAuthorized]);
+  // const fetchUser = async () => {
+  //   try {
+  //     const response = await axios.get<{ user: any }>(
+  //       "http://localhost:4000/api/v1/user/getuser",
+  //       {
+  //         withCredentials: true,
+  //       }
+  //     );
+  //     setUser(response.data.user);
+  //     console.log("user data", response.data.user);
+  //     setIsAuthorized(true);
+  //   } catch (error) {
+  //     setIsAuthorized(false);
+  //   }
+  // };
+  // useEffect(() => {
+  //   if (isAuthorized) {
+  //     fetchUser();
+  //   } else {
+  //     router.push("/login");
+  //   }
+  // }, [isAuthorized, setUser, setIsAuthorized]);
 
   const handleLogout = async () => {
     try {
@@ -47,6 +50,7 @@ const Navbar: React.FC = () => {
         }
       );
       toast.success(response.data.message);
+      localStorage.setItem("isAuthorized", "false");
       setIsAuthorized(false);
       router.push("/login");
     } catch (error: any) {

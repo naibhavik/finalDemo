@@ -5,10 +5,12 @@ import { ToastContainer } from "react-toastify";
 import Footer from "@/components/Layout/Footer";
 import "./globals.css";
 import Navbar from "@/components/Layout/Navbar";
-import "../components/NewJob/assets/scss/style.scss"
+import "../components/NewJob/assets/scss/style.scss";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
-
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import Providers from "./redux/Provider";
+import { persistor, store } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 interface User {
   _id: string;
   name: string;
@@ -60,14 +62,18 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body>
-        <Context.Provider
-          value={{ isAuthorized, setIsAuthorized, user, setUser }}
-        >
-          <ToastContainer />
-          <Navbar />
-          {children}
-          <Footer />
-        </Context.Provider>
+        <Providers>
+          <PersistGate loading={null} persistor={persistor}>
+            <Context.Provider
+              value={{ isAuthorized, setIsAuthorized, user, setUser }}
+            >
+              <ToastContainer />
+              <Navbar />
+              {children}
+              <Footer />
+            </Context.Provider>
+          </PersistGate>
+        </Providers>
       </body>
     </html>
   );
