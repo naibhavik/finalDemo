@@ -388,3 +388,77 @@ export const contactData: ContactItem[] = [
     link: "View on Google map",
   },
 ];
+interface Teamdata{
+    image:string,
+    name:string,
+    title:string
+}
+export const teamData: Teamdata[] = [
+  {
+    image: "/images/team/01.jpg",
+    name: "Jack John",
+    title: "Job Seeker",
+  },
+  {
+    image: "/images/team/02.jpg",
+    name: "Krista John",
+    title: "Job Seeker",
+  },
+  {
+    image: "/images/team/03.jpg",
+    name: "Roger Jackson",
+    title: "Job Seeker",
+  },
+  {
+    image: "/images/team/04.jpg",
+    name: "Johnny English",
+    title: "Job Seeker",
+  },
+];
+interface ServicesData {
+  icon: any;
+  title: string;
+  desc: string;
+}
+export const servicesData: ServicesData[] = [
+  {
+    icon: FiPhone,
+    title: "24/7 Support",
+    desc: "Many desktop publishing now use and a search for job.",
+  },
+  {
+    icon: FiCpu,
+    title: "Tech & Startup Jobs",
+    desc: "Many desktop publishing now use and a search for job.",
+  },
+  {
+    icon: FiActivity,
+    title: "Quick & Easy",
+    desc: "Many desktop publishing now use and a search for job.",
+  },
+  {
+    icon: FiClock,
+    title: "Save Time",
+    desc: "Many desktop publishing now use and a search for job.",
+  },
+  {
+    icon: FiFileText,
+    title: "Apply with confidence",
+    desc: "Many desktop publishing now use and a search for job.",
+  },
+  {
+    icon: FiCodesandbox,
+    title: "Reduce Hiring Bias",
+    desc: "Many desktop publishing now use and a search for job.",
+  },
+  {
+    icon: FiUsers,
+    title: "Proactive Employers",
+    desc: "Many desktop publishing now use and a search for job.",
+  },
+  {
+    icon: FiUser,
+    title: "Proactive Employers",
+    desc: "Many desktop publishing now use and a search for job.",
+  },
+];
