@@ -119,6 +119,11 @@ const Navbar: React.FC = () => {
             </>
           )}
           <li>
+            <Link href="/contactus" onClick={() => setShow(false)}>
+              Contactus
+            </Link>
+          </li>
+          <li>
             <button onClick={handleLogout}>LOGOUT</button>
           </li>
         </ul>

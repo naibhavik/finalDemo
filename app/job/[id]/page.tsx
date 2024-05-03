@@ -106,8 +106,8 @@ const JobDetails: React.FC<Props> = (props) => {
             </Typography>
           </div>
 
-          <div className="job-details-container mt-5 mb-10 gap-8">
-            <div className="job-post job-post-list rounded shadow p-4 ">
+          <div className="job-details-container mt-5 mb-10 gap-8 w-30">
+            <div className=" h-[300px] w-[500px] rounded shadow p-4 ml-8 ">
               <Typography>
                 <span className="bold">Title:</span> <span>{job.title}</span>
               </Typography>
@@ -180,6 +180,7 @@ const JobDetails: React.FC<Props> = (props) => {
           justify-content: center;
           border-radius: 15px;
           border: "5px solid black";
+          
           
         }
 

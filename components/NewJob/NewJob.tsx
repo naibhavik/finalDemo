@@ -1,7 +1,9 @@
-import React from "react";
+"use client";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import VideoModal from "./videoModal";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 // import ScrollTop from "../componants/scrollTop";
 // import Blog from "./blog";
 import Companies from "./companies";
@@ -16,6 +18,7 @@ import {
 } from "./assets/icons/vander";
 import { jobData, categoriesTwoData } from "./data";
 import ScrollTop from "./scrollTop";
+import { Context } from "@/app/layout";
 // import Blog from "./blog";
 
 interface JobItem {
@@ -28,8 +31,58 @@ interface JobItem {
   name: string;
   country: string;
 }
+interface Job {
+  _id: string;
+  category: string;
+  title: string;
+  country: string;
+  location: string;
+  experience: string;
+  salaryFrom: string;
+  salaryTo: string;
+}
 
 const NewJob: React.FC = () => {
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const { isAuthorized, user }: any = useContext(Context);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
+  const router = useRouter();
+  const fetchData = async () => {
+    try {
+      const res = await axios.get<{ jobs: Job[] }>(
+        "http://localhost:4000/api/v1/job/getall",
+        {
+          withCredentials: true,
+        }
+      );
+      setJobs(res.data.jobs);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (isAuthorized) {
+      router.push("/");
+      fetchData();
+    } else {
+      router.push("/login");
+    }
+  }, [isAuthorized, router]);
+  useEffect(() => {
+    // Filter jobs based on search query
+    const filtered = jobs.filter((job) =>
+      job.category.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredJobs(filtered);
+  }, [jobs, searchQuery]);
+  const handleSearchInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSearchQuery(event.target.value);
+  };
+
   return (
     <>
       <section
@@ -65,9 +118,10 @@ const NewJob: React.FC = () => {
                               <input
                                 name="name"
                                 type="text"
-                                id="job-keyword"
-                                className="form-control filter-input-box bg-light border-0"
-                                placeholder="Search your keaywords"
+                                placeholder="Search by category..."
+                                value={searchQuery}
+                                onChange={handleSearchInputChange}
+                                className="form-control filter-input-box ml-6 bg-light border-0"
                               />
                             </div>
                           </div>
@@ -108,7 +162,7 @@ const NewJob: React.FC = () => {
                   alt=""
                 />
 
-                <VideoModal />
+                {/* <VideoModal /> */}
               </div>
             </div>
           </div>
@@ -130,6 +184,54 @@ const NewJob: React.FC = () => {
       </div>
       <section className="section">
         <Counter />
+        <div className="container mt-100 mt-60">
+          <div className="row justify-content-center mb-4 pb-2">
+            <div className="col-12">
+              <div className="section-title text-center">
+                <h4 className="title mb-3">Browse by Categories</h4>
+                <p className="text-muted para-desc mx-auto mb-0">
+                  Search all the open positions on the web. Get your own
+                  personalized salary estimate. Read reviews on over 30000+
+                  companies worldwide.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="row row-cols-lg-5 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4 mt-0">
+            {filteredJobs.slice(0, 6).map((item, index) => {
+              return (
+                <div className="col" key={index}>
+                  <div className="job-category job-category-two rounded shadow bg-light p-3">
+                    <h5 className="mb-1">{item.category}</h5>
+                    <p className="text-muted para mb-2">{item.experience}</p>
+                    <p className="text-muted para mb-2">{item.country}</p>
+                    {/* <p className="text-muted para mb-2">{item.location}</p> */}
+                    <p className="text-muted para mb-2">
+                      {item.salaryFrom} to {item.salaryTo}
+                    </p>
+                    <Link href="" className="text-primary fw-medium link">
+                      Explore Jobs <i className="mdi mdi-arrow-right"></i>
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="row mt-4">
+            <div className="col-12">
+              <div className="text-center">
+                <Link
+                  href="/job/getall"
+                  className="btn btn-link primary text-muted"
+                >
+                  See More Categories <i className="mdi mdi-arrow-right"></i>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div className="container mt-100 mt-60">
           <div className="row justify-content-center mb-4 pb-2">
@@ -208,50 +310,6 @@ const NewJob: React.FC = () => {
         <AboutUs containerClass="container mt-100 mt-60" />
 
         <div className="container mt-100 mt-60">
-          <div className="row justify-content-center mb-4 pb-2">
-            <div className="col-12">
-              <div className="section-title text-center">
-                <h4 className="title mb-3">Browse by Categories</h4>
-                <p className="text-muted para-desc mx-auto mb-0">
-                  Search all the open positions on the web. Get your own
-                  personalized salary estimate. Read reviews on over 30000+
-                  companies worldwide.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="row row-cols-lg-5 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4 mt-0">
-            {categoriesTwoData.map((item, index) => {
-              return (
-                <div className="col" key={index}>
-                  <div className="job-category job-category-two rounded shadow bg-light p-3">
-                    <h5 className="mb-1">{item.title}</h5>
-                    <p className="text-muted para mb-2">{item.job}</p>
-                    <Link href="" className="text-primary fw-medium link">
-                      Explore Jobs <i className="mdi mdi-arrow-right"></i>
-                    </Link>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="row mt-4">
-            <div className="col-12">
-              <div className="text-center">
-                <Link
-                  href="/job-categories"
-                  className="btn btn-link primary text-muted"
-                >
-                  See More Categories <i className="mdi mdi-arrow-right"></i>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="container mt-100 mt-60">
           <Companies />
         </div>
 
@@ -272,7 +330,7 @@ const NewJob: React.FC = () => {
           {/* <Blog/> */}
         </div>
       </section>
-      <ScrollTop/>
+      <ScrollTop />
     </>
   );
 };

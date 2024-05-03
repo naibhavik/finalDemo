@@ -9,7 +9,7 @@ import { addUserSuccess } from "./redux/slices/UserSlice";
 import { useDispatch, useSelector } from "react-redux";
 export default function App() {
   const dispatch = useDispatch();
-  const myuser = useSelector((state: any) => state.getUser);
+  const myuser = useSelector((state: any) => state.user);
   const { isAuthorized, setIsAuthorized, setUser } = useContext<any>(Context);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -47,7 +47,7 @@ export default function App() {
 
   return (
     <main>
-      <NewJob/>
+      <NewJob />
     </main>
   );
 }

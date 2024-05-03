@@ -21,6 +21,7 @@ import {
   FiMail,
   FiMapPin,
 } from "./assets/icons/vander";
+
 export interface Job {
   id: number;
   image: string;
@@ -358,5 +359,32 @@ export const categoriesTwoData: CategoriesTwoData []= [
   {
     title: "Full Stack Developer",
     job: "90 Jobs Available",
+  },
+];
+interface ContactItem {
+  icon: any;
+  title: string;
+  desc: string;
+  link: string;
+}
+
+export const contactData: ContactItem[] = [
+  {
+    icon: FiPhone,
+    title: "Phone",
+    desc: "Start working with Jobnova that can provide everything",
+    link: "tel:+152534-468-854",
+  },
+  {
+    icon: FiMail,
+    title: "Email",
+    desc: "Start working with Jobnova that can provide everything",
+    link: "contact@example.com",
+  },
+  {
+    icon: FiMapPin,
+    title: "Location",
+    desc: "Start working with Jobnova that can provide everything",
+    link: "View on Google map",
   },
 ];

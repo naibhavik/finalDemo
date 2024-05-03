@@ -5,14 +5,22 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Context } from "@/app/layout";
 import ScrollTop from "@/components/NewJob/scrollTop";
-
+import Image from "next/image";
+import {
+  FiBookmark,
+  FiClock,
+  FiMapPin,
+} from "@/components/NewJob/assets/icons/vander";
+import { jobData } from "@/components/NewJob/data";
 interface Job {
   _id: string;
   category: string;
   title: string;
   country: string;
   location: string;
-  experience:string;
+  experience: string;
+  salaryFrom: string;
+  salaryTo: string;
 }
 
 const Jobs: React.FC = () => {
@@ -101,7 +109,7 @@ const Jobs: React.FC = () => {
         <div className="container">
           <h1 className="header">ALL AVAILABLE JOBS</h1>
           {/* Search input fields */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-10">
             <input
               type="text"
               placeholder="Search by category..."
@@ -117,16 +125,124 @@ const Jobs: React.FC = () => {
               className="search-input"
             />
           </div>
-          <div className=" w-6job-post job-post-list rounded shadow p-4 d-md-flex align-items-center justify-content-between position-relative">
+
+          <div className="container mt-60">
+            <div className="row g-4">
+              {filteredJobs.map((item, index) => {
+                return (
+                  <div className="col-12" key={index}>
+                    <div className="job-post job-post-list rounded shadow p-4 d-md-flex align-items-center justify-content-between position-relative">
+                      <div className="d-flex align-items-center w-310px">
+                        {/* <Image
+                          src={jobData.}
+                          width={65}
+                          height={65}
+                          className="avatar avatar-small rounded shadow p-3 bg-white"
+                          alt=""
+                        /> */}
+
+                        <div className="ms-3">
+                          <Link
+                            href={`/job-detail-one/${""}`}
+                            className="h5 title text-dark"
+                          >
+                            {item.category}
+                          </Link>
+                        </div>
+                      </div>
+
+                      <div className="d-flex align-items-center justify-content-between d-md-block mt-3 mt-md-0 w-100px">
+                        <span className="badge bg-soft-primary rounded-pill">
+                          {item.experience}
+                        </span>
+                        <span className="text-muted d-flex align-items-center fw-medium mt-md-2">
+                          <FiClock className="fea icon-sm me-1 align-middle" />
+                          {item.location}
+                        </span>
+                      </div>
+
+                      <div className="d-flex align-items-center justify-content-between d-md-block mt-2 mt-md-0 w-130px">
+                        <span className="text-muted d-flex align-items-center">
+                          <FiMapPin className="fea icon-sm me-1 align-middle" />
+                          {item.country}
+                        </span>
+                        <span className="d-flex fw-medium mt-md-2">
+                          {item.salaryFrom} LPA
+                        </span>
+                        <label>--</label>
+                        <span className="d-flex fw-medium mt-md-2">
+                          {item.salaryTo} LPA
+                        </span>
+                      </div>
+
+                      <div className="mt-3 mt-md-0">
+                        <Link
+                          href=""
+                          className="btn btn-sm btn-icon btn-pills btn-soft-primary bookmark"
+                        >
+                          <FiBookmark className="icons" />
+                        </Link>
+
+                        <Link
+                          href={`/job/${item._id}`}
+                          className="btn btn-sm btn-primary w-full ms-md-1"
+                        >
+                          Apply Now
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="row">
+              <div className="col-12 mt-4 pt-2">
+                <ul className="pagination justify-content-center mb-0">
+                  <li className="page-item">
+                    <Link className="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true">
+                        <i className="mdi mdi-chevron-left fs-6"></i>
+                      </span>
+                    </Link>
+                  </li>
+                  <li className="page-item">
+                    <Link className="page-link" href="#">
+                      1
+                    </Link>
+                  </li>
+                  <li className="page-item active">
+                    <Link className="page-link" href="#">
+                      2
+                    </Link>
+                  </li>
+                  <li className="page-item">
+                    <Link className="page-link" href="#">
+                      3
+                    </Link>
+                  </li>
+                  <li className="page-item">
+                    <Link className="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">
+                        <i className="mdi mdi-chevron-right fs-6"></i>
+                      </span>
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* <div className=" w-6job-post job-post-list rounded shadow p-4 d-md-flex align-items-center justify-content-between position-relative">
             <div className="d-flex align-items-center w-310px ">
               <div className="banner flex items-center">
-                {/* Display filtered jobs */}
+                
                 {filteredJobs.length > 0 ? (
                   filteredJobs.map((element) => (
                     <div className="card " key={element._id}>
                       <p>Category: {element.category}</p>
                       <p>Experience: {element.experience}</p>
-                      {/* <p>{element.title}</p> */}
+                    
                       <p>Country: {element.country}</p>
                       <p>Location: {element.location}</p>
                       <Link href={`/job/${element._id}`} passHref>
@@ -139,10 +255,10 @@ const Jobs: React.FC = () => {
                 )}
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
-      <ScrollTop/>
+      <ScrollTop />
     </>
   );
 };
