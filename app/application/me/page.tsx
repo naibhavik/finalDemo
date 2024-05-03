@@ -1,11 +1,15 @@
-"use client"
+"use client";
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import ResumeModal from "@/components/ResumeModal";
 import { Context } from "@/app/layout";
-
+import {
+  FiBookmark,
+  FiClock,
+  FiMapPin,
+} from "@/components/NewJob/assets/icons/vander";
 
 interface Application {
   _id: string;
@@ -69,7 +73,7 @@ const MyApplications: React.FC = () => {
       router.push("/login");
     } else {
       fetchData();
-       router.push("/application/me");
+      router.push("/application/me");
     }
   }, [isAuthorized, user]);
 
@@ -177,64 +181,97 @@ const JobSeekerCard: React.FC<JobSeekerCardProps> = ({
   openModal,
 }) => {
   return (
-    <>
-      <div className="job_seeker_card">
-        <div className="detail">
-          <p>
-            <span>Name:</span> {element.name}
-          </p>
-          <p>
-            <span>Email:</span> {element.email}
-          </p>
-          <p>
-            <span>Phone:</span> {element.phone}
-          </p>
-          <p>
-            <span>Address:</span> {element.address}
-          </p>
-          <p>
-            <span>CoverLetter:</span> {element.coverLetter}
-          </p>
-        </div>
-        <div className="resume">
-          <img
-            src={element.resume.url}
-            alt="resume"
-            onClick={() => openModal(element.resume.url)}
-          />
-        </div>
-        <div className="btn_area">
-          <button onClick={() => deleteApplication(element._id)}>
-            Delete Application
-          </button>
+    <div className="job-post job-post-list rounded shadow p-4 d-md-flex align-items-center justify-content-between position-relative">
+      <div className="d-flex align-items-center w-310px">
+        <div className="ms-3">
+          <span className="fw-bold">Name:</span> {element.name}
         </div>
       </div>
-    </>
+
+      <div className="d-flex align-items-center justify-content-between d-md-block mt-3 mt-md-0 w-200px  pr-10">
+        <span className="badge bg-soft-primary rounded-pill">
+          <span className="fw-bold">Email:</span> {element.email}
+        </span>
+        <span className="text-muted d-flex align-items-center fw-medium mt-md-2">
+          <FiClock className="fea icon-sm me-1 align-middle" />
+          <span className="fw-bold">Phone:</span> {element.phone}
+        </span>
+        <span className="text-muted d-flex align-items-center">
+          <FiMapPin
+            className="fea icon-sm me-1 align-middle"
+            style={{ display: "inline-block" }}
+          />
+          <span className="fw-bold">
+            Address:
+            {element.address}
+          </span>
+        </span>
+      </div>
+      <div className="d-flex align-items-center justify-content-between d-md-block mt-2 mt-md-0 w-130px">
+        <span className="d-flex fw-medium mt-md-2">
+          <span className="fw-bold pr-3">
+            Cover Letter: {element.coverLetter}
+          </span>
+        </span>
+      </div>
+
+      <div className="w-40 h-30">
+        <img
+          src={element.resume.url}
+          alt="resume"
+          onClick={() => openModal(element.resume.url)}
+        />
+      </div>
+      <div className="btn_area">
+        <button
+          className="btn btn-danger"
+          onClick={() => deleteApplication(element._id)}
+        >
+          Delete Application
+        </button>
+      </div>
+    </div>
   );
 };
 
 const EmployerCard: React.FC<EmployerCardProps> = ({ element, openModal }) => {
   return (
     <>
-      <div className="job_seeker_card">
-        <div className="detail">
-          <p>
-            <span>Name:</span> {element.name}
-          </p>
-          <p>
-            <span>Email:</span> {element.email}
-          </p>
-          <p>
-            <span>Phone:</span> {element.phone}
-          </p>
-          <p>
-            <span>Address:</span> {element.address}
-          </p>
-          <p>
-            <span>CoverLetter:</span> {element.coverLetter}
-          </p>
+      <div className="job-post job-post-list rounded shadow p-4 d-md-flex align-items-center justify-content-between position-relative">
+        <div className="d-flex align-items-center w-80px">
+          <div className="ms-3">
+            <span className="fw-bold">Name:</span> {element.name}
+          </div>
         </div>
-        <div className="resume">
+
+        <div className="d-flex align-items-center justify-content-between d-md-block mt-3 mt-md-0 w-200px  pr-10">
+          <span className="badge bg-soft-primary rounded-pill">
+            <span className="fw-bold">Email:</span> {element.email}
+          </span>
+          <span className="text-muted d-flex align-items-center fw-medium mt-md-2">
+            <FiClock className="fea icon-sm me-1 align-middle" />
+            <span className="fw-bold">Phone:</span> {element.phone}
+          </span>
+          <span className="text-muted d-flex align-items-center">
+            <FiMapPin
+              className="fea icon-sm me-1 align-middle"
+              style={{ display: "inline-block" }}
+            />
+            <span className="fw-bold">
+              Address:
+              {element.address}
+            </span>
+          </span>
+        </div>
+        <div className="d-flex align-items-center justify-content-between d-md-block mt-2 mt-md-0 w-130px">
+          <span className="d-flex fw-medium mt-md-2">
+            <span className="fw-bold pr-3">
+              Cover Letter: {element.coverLetter}
+            </span>
+          </span>
+        </div>
+
+        <div className="w-40 h-30">
           <img
             src={element.resume.url}
             alt="resume"
