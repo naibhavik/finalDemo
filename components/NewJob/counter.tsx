@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import CountUp from "react-countup";
 
@@ -9,7 +9,7 @@ const Counter: React.FC = () => {
         <div className="col-md-4">
           <div className="counter-box text-center">
             <h1 className="fw-bold">
-              <CountUp className="counter-value" start={0} end={1548} />
+              <CountUp className="counter-value" start={0} end={1000} />
               K+
             </h1>
             <h6 className="counter-head text-muted text-uppercase">
@@ -21,7 +21,7 @@ const Counter: React.FC = () => {
         <div className="col-md-4">
           <div className="counter-box text-center">
             <h1 className="fw-bold">
-              <CountUp className="counter-value" start={0} end={25} />+
+              <CountUp className="counter-value" start={0} end={80} />+
             </h1>
             <h6 className="counter-head text-muted text-uppercase">Branches</h6>
           </div>

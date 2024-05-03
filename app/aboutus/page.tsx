@@ -46,19 +46,6 @@ const AboutUs: React.FC = () => {
               </div>
             </div>
           </div>
-
-          <div className="position-middle-bottom">
-            <nav aria-label="breadcrumb" className="d-block">
-              <ul className="breadcrumb breadcrumb-muted mb-0 p-0">
-                <li className="breadcrumb-item">
-                  <Link href="/">Jobnova</Link>
-                </li>
-                <li className="breadcrumb-item active" aria-current="page">
-                  About us
-                </li>
-              </ul>
-            </nav>
-          </div>
         </div>
       </section>
       <div className="position-relative">
@@ -84,7 +71,7 @@ const AboutUs: React.FC = () => {
           <div className="row justify-content-center mb-4 pb-2">
             <div className="col-12">
               <div className="section-title text-center">
-                <h4 className="title mb-3">Heres why youll love it Jobnova</h4>
+                <h4 className="title mb-3">Heres why youll love it over job application</h4>
                 <p className="text-muted para-desc mx-auto mb-0">
                   Search all the open positions on the web. Get your own
                   personalized salary estimate. Read reviews on over 30000+
@@ -289,7 +276,7 @@ const AboutUs: React.FC = () => {
                 <h4 className="title mb-4">Have Question ? Get in touch!</h4>
                 <p className="text-muted para-desc mx-auto">
                   Start working with{" "}
-                  <span className="text-primary fw-bold">Jobnova</span> that can
+                  <span className="text-primary fw-bold">over team</span> that can
                   provide everything you need to generate awareness, drive
                   traffic, connect.
                 </p>

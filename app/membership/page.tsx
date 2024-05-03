@@ -70,7 +70,7 @@ const SubscriptionPage: React.FC = () => {
       ];
 
       const response = await fetch(
-        "http://localhost:4000/api/create-checkout-session",
+        "http://localhost:4000/api/create-checkout-session/payment",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

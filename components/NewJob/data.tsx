@@ -372,19 +372,19 @@ export const contactData: ContactItem[] = [
   {
     icon: FiPhone,
     title: "Phone",
-    desc: "Start working with Jobnova that can provide everything",
-    link: "tel:+152534-468-854",
+    desc: "Start working with over team that can provide everything",
+    link: "tel:+91 6352360058",
   },
   {
     icon: FiMail,
     title: "Email",
-    desc: "Start working with Jobnova that can provide everything",
+    desc: "Start working with with over team that can provide everything",
     link: "contact@example.com",
   },
   {
     icon: FiMapPin,
     title: "Location",
-    desc: "Start working with Jobnova that can provide everything",
+    desc: "Start working with with over team can provide everything",
     link: "View on Google map",
   },
 ];
