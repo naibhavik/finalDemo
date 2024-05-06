@@ -169,12 +169,21 @@ const PostJob: React.FC = () => {
                 >
                   <MenuItem value="">Select Category</MenuItem>
                   <MenuItem value="Graphics & Design">
-                    Graphics & Design
+                    Data Entry Operator
                   </MenuItem>
                   <MenuItem value="Mobile App Development">
                     Mobile App Development
                   </MenuItem>
+                  <MenuItem value="Artificial Intelligence">
+                    Artificial Intelligence
+                  </MenuItem>
+                  <MenuItem value="MEAN STACK Development">
+                    MEAN STACK Development
+                  </MenuItem>
                   <MenuItem value="Web Development">Web Development</MenuItem>
+                  <MenuItem value="Frontend Web Development">
+                    Frontend Web Development
+                  </MenuItem>
                 </Select>
                 {category === "" && (
                   <FormHelperText>Please select a category</FormHelperText>

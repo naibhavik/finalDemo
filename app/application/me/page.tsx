@@ -40,6 +40,7 @@ const MyApplications: React.FC = () => {
   const [applications, setApplications] = useState<Application[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [resumeImageUrl, setResumeImageUrl] = useState<string>("");
+  const [accept, setAccept] = useState<boolean>(true);
 
   const { isAuthorized } = useContext(Context);
   const router = useRouter();
@@ -188,7 +189,6 @@ const JobSeekerCard: React.FC<JobSeekerCardProps> = ({
           <span className="fw-bold">Name:</span> {element.name}
         </div>
       </div>
-      
 
       <div className="d-flex align-items-center justify-content-between d-md-block mt-3 mt-md-0 w-200px  pr-10">
         <span className="badge bg-soft-primary rounded-pill">
