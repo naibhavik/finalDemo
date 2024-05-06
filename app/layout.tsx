@@ -11,6 +11,7 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Providers from "./redux/Provider";
 import { persistor, store } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
+
 interface User {
   _id: string;
   name: string;
@@ -67,10 +68,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <Context.Provider
               value={{ isAuthorized, setIsAuthorized, user, setUser }}
             >
-              <ToastContainer />
-              <Navbar />
-              {children}
-              <Footer />
+                <ToastContainer />
+                <Navbar />
+                {children}
+                <Footer />
+              
             </Context.Provider>
           </PersistGate>
         </Providers>

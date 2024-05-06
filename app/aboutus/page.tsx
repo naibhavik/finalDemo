@@ -207,7 +207,7 @@ const AboutUs: React.FC = () => {
                 <FiHelpCircle className="fea icon-ex-md text-primary me-2 mt-1" />
                 <div className="flex-1">
                   <h5 className="mt-0">
-                    How our <span className="text-primary">Jobnova</span> work ?
+                    How our <span className="text-primary">JOB APPLICATION</span> work ?
                   </h5>
                   <p className="answer text-muted mb-0">
                     Due to its widespread use as filler text for layouts,
@@ -256,7 +256,7 @@ const AboutUs: React.FC = () => {
                 <div className="flex-1">
                   <h5 className="mt-0">
                     {" "}
-                    Is <span className="text-primary">Jobnova</span> safer to
+                    Is <span className="text-primary">JOB APPLICATION</span> safer to
                     use with my account ?
                   </h5>
                   <p className="answer text-muted mb-0">

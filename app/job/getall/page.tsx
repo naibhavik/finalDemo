@@ -91,7 +91,7 @@ const Jobs: React.FC = () => {
           backgroundImage: "url('/images/hero/bg.jpg')",
           backgroundPosition: "top",
         }}
-      >
+        >
         <div className="bg-overlay bg-gradient-overlay"></div>
         <div className="container">
           <div className="row mt-5 justify-content-center">
@@ -187,7 +187,7 @@ const Jobs: React.FC = () => {
                           href={`/job/${item._id}`}
                           className="btn btn-sm btn-primary w-full ms-md-1"
                         >
-                          Apply Now
+                          Job Details
                         </Link>
                       </div>
                     </div>
@@ -232,30 +232,6 @@ const Jobs: React.FC = () => {
               </div>
             </div>
           </div>
-
-          {/* <div className=" w-6job-post job-post-list rounded shadow p-4 d-md-flex align-items-center justify-content-between position-relative">
-            <div className="d-flex align-items-center w-310px ">
-              <div className="banner flex items-center">
-                
-                {filteredJobs.length > 0 ? (
-                  filteredJobs.map((element) => (
-                    <div className="card " key={element._id}>
-                      <p>Category: {element.category}</p>
-                      <p>Experience: {element.experience}</p>
-                    
-                      <p>Country: {element.country}</p>
-                      <p>Location: {element.location}</p>
-                      <Link href={`/job/${element._id}`} passHref>
-                        Job Details
-                      </Link>
-                    </div>
-                  ))
-                ) : (
-                  <p>No jobs found.</p>
-                )}
-              </div>
-            </div>
-          </div> */}
         </div>
       </section>
       <ScrollTop />

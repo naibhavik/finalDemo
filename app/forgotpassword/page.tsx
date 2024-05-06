@@ -13,9 +13,9 @@ import { useRouter } from "next/navigation";
 import { Context } from "../layout";
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [role, setRole] = useState<string>("");
+  const [email, setEmail] = useState<string>("naibhavik68@gmail.com");
+//   const [password, setPassword] = useState<string>("Bhavik@123");
+//   const [role, setRole] = useState<string>("Employer");
   const router = useRouter();
 
   const { isAuthorized, setIsAuthorized }: any = useContext(Context);
@@ -24,8 +24,8 @@ const Login: React.FC = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post<{ message: string }>(
-        "http://localhost:4000/api/v1/user/login",
-        { email, password, role },
+        "http://localhost:4000/api/v1/user/forget-password",
+        { email },
         {
           headers: {
             "Content-Type": "application/json",
@@ -35,13 +35,12 @@ const Login: React.FC = () => {
       );
       toast.success(data.message);
       setEmail("");
-      setPassword("");
-      setRole("");
-      const mylocal = localStorage.setItem("isAuthorized", "true");
-      setIsAuthorized(true);
-      console.log("local", mylocal);
+     
+    //   const mylocal = localStorage.setItem("isAuthorized", "true");
+    //   setIsAuthorized(true);
+    //   console.log("local", mylocal);
 
-      router.push("/"); // Redirect to home page after successful login
+      router.push("/login"); // Redirect to home page after successful login
     } catch (error: any) {
       toast.error(error.response.data.message);
       console.log("this is error");
@@ -59,20 +58,10 @@ const Login: React.FC = () => {
         <div className="container">
           <div className="header">
             <Image src="/JobZeelogo.png" alt="logo" width={100} height={100} />
-            <h3>Login to your account</h3>
+            <h3>Forgot Your Paaword</h3>
           </div>
           <form onSubmit={handleLogin}>
-            <div className="inputTag">
-              <label>Login As</label>
-              <div>
-                <select value={role} onChange={(e) => setRole(e.target.value)}>
-                  <option value="">Select Role</option>
-                  <option value="Employer">Employer</option>
-                  <option value="Job Seeker">Job Seeker</option>
-                </select>
-                <FaRegUser />
-              </div>
-            </div>
+            
             <div className="inputTag">
               <label>Email Address</label>
               <div>
@@ -85,22 +74,10 @@ const Login: React.FC = () => {
                 <MdOutlineMailOutline />
               </div>
             </div>
-            <div className="inputTag">
-              <label>Password</label>
-              <div>
-                <input
-                  type="password"
-                  placeholder="Your Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <RiLock2Fill />
-              </div>
-            </div>
-            <button type="submit">Login</button>
+            
+            <button type="submit">Forgotpassword</button>
             <p>
-              forgotpassword{" "}
-              <Link href="/forgotpassword"> forgotpassword</Link>
+               <Link href="/login"> Login Now</Link>
             </p>
             <p>
               Dont have an account? <Link href="/register">Register Now</Link>

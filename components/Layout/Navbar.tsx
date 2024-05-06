@@ -64,9 +64,12 @@ const Navbar: React.FC = () => {
     router.push("/login"); // Redirect to home page if already authorized
     return null;
   }
+   console.log("check", isAuthorized);
 
   return (
     <nav className={isAuthorized ? "navbarShow" : "navbarHide"}>
+
+     
       <div className="container">
         <div className="logo">
           {/* You need to use Next.js Image component to import images */}

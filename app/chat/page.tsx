@@ -88,7 +88,7 @@ const Chatapp: React.FC = () => {
             <div className="col-12">
               <div className="title-heading text-center">
                 <h5 className="heading fw-semibold mb-0 sub-heading text-white title-dark">
-                  Chating App
+                  Job Application Form
                 </h5>
               </div>
             </div>
@@ -108,13 +108,13 @@ const Chatapp: React.FC = () => {
 
       <div className="w-screen h-screen bg-gray-100 flex justify-center items-center">
         {chatActive ? (
-          <div className="rounded-md w-full md:w-[65vw] lg:w[40vw] mx-auto bg-white">
+          <div className="rounded-xl w-full md:w-[65vw] lg:w[40vw] mx-auto bg-white ">
             <h1 className="font-bold text-center my-2 uppercase">Squde Chat</h1>
             <div className="overflow-y-scroll h-[80vh] lg:h-[60vh]">
               {messages.map((message: Message, index: number) => (
                 <div
                   key={index}
-                  className={`flex rounded-md shadow-sm my-5 ${
+                  className={`flex rounded-md shadow-md my-5 ${
                     username === message.user ? "justify-end" : "justify-start"
                   }`}
                 >
@@ -127,8 +127,10 @@ const Chatapp: React.FC = () => {
                   </div>
                   <div className={`px-2 bg--200 rounded-md`}>
                     <span className="text-sm">{message.user}</span>
-                    <h3 className="font-bold">{message.message}</h3>
-                    <span className="text-sm font-bold">{message.time}</span>
+                    <h3 className="font-bold ">{message.message}</h3>
+                    <span className="text-sm m-2 text-right">
+                      {message.time}
+                    </span>
                   </div>
                 </div>
               ))}

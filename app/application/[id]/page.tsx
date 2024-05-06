@@ -18,6 +18,7 @@ const Application: React.FC<ApplicationProps> = (props) => {
   const [coverLetter, setCoverLetter] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [address, setAddress] = useState<string>("");
+  // const [roomid, setRoomid] = useState<string>("");
   const [resume, setResume] = useState<File | null>(null);
 
   const { isAuthorized, user } = useContext(Context);
@@ -40,12 +41,13 @@ const Application: React.FC<ApplicationProps> = (props) => {
     formData.append("email", email);
     formData.append("phone", phone);
     formData.append("address", address);
+    // formData.append("roomid", roomid);
     formData.append("coverLetter", coverLetter);
     if (resume) {
       formData.append("resume", resume);
     }
     formData.append("jobId", id);
-
+    console.log(formData)
     try {
       const { data } = await axios.post(
         "http://localhost:4000/api/v1/application/post",
@@ -61,6 +63,7 @@ const Application: React.FC<ApplicationProps> = (props) => {
       setEmail("");
       setCoverLetter("");
       setPhone("");
+      // setRoomid("");
       setAddress("");
       setResume(null);
       toast.success(data.message);
@@ -147,6 +150,7 @@ const Application: React.FC<ApplicationProps> = (props) => {
               "& > :not(style)": { mr: 1, mt: 1 },
             }}
           />
+         
           <TextField
             label="Cover Letter"
             value={coverLetter}
