@@ -17,6 +17,7 @@ interface Application {
   name: string;
   email: string;
   phone: string;
+  roomid:string;
   address: string;
   coverLetter: string;
   resume: {
@@ -198,6 +199,10 @@ const JobSeekerCard: React.FC<JobSeekerCardProps> = ({
           <FiClock className="fea icon-sm me-1 align-middle" />
           <span className="fw-bold">Phone:</span> {element.phone}
         </span>
+        <span className="text-muted d-flex align-items-center fw-medium mt-md-2">
+          <FiClock className="fea icon-sm me-1 align-middle" />
+          <span className="fw-bold">Job Seeker Application Status:</span> {element.roomid}
+        </span>
         <span className="text-muted d-flex align-items-center">
           <FiMapPin
             className="fea icon-sm me-1 align-middle"
@@ -236,7 +241,30 @@ const JobSeekerCard: React.FC<JobSeekerCardProps> = ({
   );
 };
 
-const EmployerCard: React.FC<EmployerCardProps> = ({ element, openModal }) => {
+const EmployerCard:React.FC<any> = ({ element, openModal }) => {
+   const [newRoomId, setNewRoomId] = useState<string>(element.roomid);
+
+  const handleRoomIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewRoomId(event.target.value);
+  };
+
+  const updateRoomId = async () => {
+    try {
+      const res = await axios.put(
+        `http://localhost:4000/api/v1/application/updateRoomId/${element._id}`,
+        { roomId: newRoomId },
+        { withCredentials: true }
+      );
+      // Assuming the backend returns the updated application
+      if (res.data.success) {
+        toast.success("Room ID updated successfully");
+        // You may want to update the application in the state here
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+      console.log("Error updating room ID");
+    }
+  }
   return (
     <>
       <div className="job-post job-post-list rounded shadow p-4 d-md-flex align-items-center justify-content-between position-relative">
@@ -262,7 +290,26 @@ const EmployerCard: React.FC<EmployerCardProps> = ({ element, openModal }) => {
               Address:
               {element.address}
             </span>
+            <span className="text-muted d-flex align-items-center fw-medium mt-md-2">
+              <FiClock className="fea icon-sm me-1 align-middle" />
+              <span className="fw-bold">Application Status of Job Seeker:</span>
+              {element.roomid}
+            </span>
           </span>
+          <>
+            <div className="text-center">
+              <input
+                type="text"
+                className="form-control"
+                value={newRoomId}
+                onChange={handleRoomIdChange}
+                placeholder="Enter new room ID"
+              />
+              <button className="btn btn-primary mt-2" onClick={updateRoomId}>
+                 Job Jobseeker Request Status Edit
+              </button>
+            </div>
+          </>
         </div>
         <div className="d-flex align-items-center justify-content-between d-md-block mt-2 mt-md-0 w-130px">
           <span className="d-flex fw-medium mt-md-2">
