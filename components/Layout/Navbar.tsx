@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 const Navbar: React.FC = () => {
   const [show, setShow] = useState<boolean>(false);
   const { isAuthorized, setIsAuthorized, user, setUser }: any =
-    useContext(Context);
+    useContext(Context); 
   const myuser = useSelector((state: any) => state.user);
   setUser(myuser);
   console.log("this is my user", myuser);
@@ -68,8 +68,6 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className={isAuthorized ? "navbarShow" : "navbarHide"}>
-
-     
       <div className="container">
         <div className="logo">
           {/* You need to use Next.js Image component to import images */}
@@ -126,6 +124,7 @@ const Navbar: React.FC = () => {
               Contactus
             </Link>
           </li>
+
           <li>
             <button onClick={handleLogout}>LOGOUT</button>
           </li>

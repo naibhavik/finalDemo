@@ -77,7 +77,7 @@ const MyJobs: React.FC = () => {
           withCredentials: true,
         }
       );
-      toast.success("Job updated successfully");
+      toast.success("Jobseeker Status Successfully");
       setEditingMode(null);
     } catch (error) {
       console.log("Error updating job:", error);

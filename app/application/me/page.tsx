@@ -17,7 +17,7 @@ interface Application {
   name: string;
   email: string;
   phone: string;
-  roomid: string;
+  jobseekerstatus: string;
   address: string;
   coverLetter: string;
   resume: {
@@ -209,7 +209,7 @@ const JobSeekerCard: React.FC<JobSeekerCardProps> = ({
         <span className="text-muted d-flex align-items-center fw-medium mt-md-2">
           <FiClock className="fea icon-sm me-1 align-middle" />
           <span className="fw-bold">Job Seeker Application Status:</span>{" "}
-          {element.roomid}
+          {element.jobseekerstatus}
         </span>
         <span className="text-muted d-flex align-items-center">
           <FiMapPin
@@ -250,7 +250,7 @@ const JobSeekerCard: React.FC<JobSeekerCardProps> = ({
 };
 
 const EmployerCard: React.FC<any> = ({ element, openModal }) => {
-  const [newRoomId, setNewRoomId] = useState<string>(element.roomid);
+  const [newRoomId, setNewRoomId] = useState<string>(element.jobseekerstatus);
 
   const handleRoomIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewRoomId(event.target.value);
@@ -260,7 +260,7 @@ const EmployerCard: React.FC<any> = ({ element, openModal }) => {
     try {
       const res = await axios.put(
         `http://localhost:4000/api/v1/application/updateRoomId/${element._id}`,
-        { roomId: newRoomId },
+        { jobseekerstatus: newRoomId },
         { withCredentials: true }
       );
       // Assuming the backend returns the updated application

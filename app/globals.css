@@ -1313,6 +1313,10 @@ p {
       align-items: center;
 }
 
+.css-1wc848c-MuiFormHelperText-root{
+  display: none !important;
+}
+
 .myJobs .container .banner .card {
 
   width: 70%;

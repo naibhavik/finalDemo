@@ -23,6 +23,7 @@ interface User {
 
 interface ContextProps {
   isAuthorized: boolean;
+  subcription:boolean;
   setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>;
   user: User; // Updated to use the User interface
   setUser: React.Dispatch<React.SetStateAction<User>>;
@@ -31,6 +32,7 @@ interface ContextProps {
 // Define the context with initial values
 export const Context = createContext<ContextProps>({
   isAuthorized: false,
+  subcription:false,
   setIsAuthorized: () => {},
   user: { _id: "", name: "", email: "", phone: 0, role: "" }, // Initialize user with empty values
   setUser: () => {},
@@ -42,6 +44,7 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   const [isAuthorized, setIsAuthorized] = useState(false);
+  const [subcription, setSubcription]=useState<boolean>(false)
   const [user, setUser] = useState<User>({
     _id: "",
     name: "",
@@ -66,13 +69,18 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Providers>
           <PersistGate loading={null} persistor={persistor}>
             <Context.Provider
-              value={{ isAuthorized, setIsAuthorized, user, setUser }}
+              value={{
+                isAuthorized,
+                setIsAuthorized,
+                user,
+                setUser,
+                subcription
+              }}
             >
-                <ToastContainer />
-                <Navbar />
-                {children}
-                <Footer />
-              
+              <ToastContainer />
+              <Navbar />
+              {children}
+              <Footer />
             </Context.Provider>
           </PersistGate>
         </Providers>
