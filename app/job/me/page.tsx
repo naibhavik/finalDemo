@@ -14,7 +14,7 @@ interface Job {
   category: string;
   country: string;
   city: string;
-  experience:string;
+  experience: string;
   location: string;
   fixedSalary?: string;
   salaryFrom?: string;
@@ -28,33 +28,31 @@ const MyJobs: React.FC = () => {
   const { isAuthorized, user }: any = useContext(Context);
   const router = useRouter();
 
+  const fetchJobs = async () => {
+    try {
+      const { data } = await axios.get(
+        "http://localhost:4000/api/v1/job/getmyjobs",
+        {
+          withCredentials: true,
+        }
+      );
+      setMyJobs(data.myJobs);
+    } catch (error) {
+      console.log("Error fetching jobs:", error);
+      toast.error("Error fetching jobs");
+      setMyJobs([]);
+    }
+  };
 
-    const fetchJobs = async () => {
-      try {
-        const { data } = await axios.get(
-          "http://localhost:4000/api/v1/job/getmyjobs",
-          {
-            withCredentials: true,
-          }
-        );
-        setMyJobs(data.myJobs);
-      } catch (error) {
-        console.log("Error fetching jobs:", error);
-        toast.error("Error fetching jobs");
-        setMyJobs([]);
-      }
-    };
+  useEffect(() => {
+    if (isAuthorized) {
+      fetchJobs();
+      router.push("/job/me");
+    } else {
+      router.push("/login");
+    }
+  }, [isAuthorized, router]);
 
-
-   useEffect(() => {
-     if (isAuthorized) {
-       fetchJobs();
-       router.push("/job/me");
-     } else {
-       router.push("/login");
-     }
-   }, [isAuthorized, router]);
-  
   // useEffect(() => {
   //   if (!isAuthorized || (user && user.role !== "Employer")) {
   //     router.push("/");
@@ -326,40 +324,40 @@ const MyJobs: React.FC = () => {
                             }
                           />
                         </div>
-                      </div>
-                    </div>
-                    <div className="button_wrapper">
-                      <div className="edit_btn_wrapper">
-                        {editingMode === element._id ? (
-                          <>
-                            <button
-                              onClick={() => handleUpdateJob(element._id)}
-                              className="check_btn"
-                            >
-                              <FaCheck />
-                            </button>
-                            <button
-                              onClick={() => handleDisableEdit()}
-                              className="cross_btn"
-                            >
-                              <RiCloseLine />
-                            </button>
-                          </>
-                        ) : (
+                        <div className="button_wrapper">
+                          <div className="edit_btn_wrapper">
+                            {editingMode === element._id ? (
+                              <>
+                                <button
+                                  onClick={() => handleUpdateJob(element._id)}
+                                  className="check_btn"
+                                >
+                                  <FaCheck />
+                                </button>
+                                <button
+                                  onClick={() => handleDisableEdit()}
+                                  className="cross_btn"
+                                >
+                                  <RiCloseLine />
+                                </button>
+                              </>
+                            ) : (
+                              <button
+                                onClick={() => handleEnableEdit(element._id)}
+                                className="edit_btn"
+                              >
+                                Edit
+                              </button>
+                            )}
+                          </div>
                           <button
-                            onClick={() => handleEnableEdit(element._id)}
-                            className="edit_btn"
+                            onClick={() => handleDeleteJob(element._id)}
+                            className="delete_btn"
                           >
-                            Edit
+                            Delete
                           </button>
-                        )}
+                        </div>
                       </div>
-                      <button
-                        onClick={() => handleDeleteJob(element._id)}
-                        className="delete_btn"
-                      >
-                        Delete
-                      </button>
                     </div>
                   </div>
                 ))}

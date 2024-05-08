@@ -1296,6 +1296,12 @@ p {
   gap: 20px;
   flex-direction: column;
 } */
+.css-zow5z4-MuiGrid-root{
+  align-items: flex-end !important;
+}
+/* .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root{
+  display: none !important;
+} */
 .myJobs .container .banner {
   padding: 20px;
   /* Adjust padding */
@@ -1304,11 +1310,12 @@ p {
   flex-wrap: wrap;
   gap: 20px;
   flex-direction: column;
+      align-items: center;
 }
 
 .myJobs .container .banner .card {
 
-  width: 100%;
+  width: 70%;
   display: flex;
   gap: 20px;
   border: 2px solid black;

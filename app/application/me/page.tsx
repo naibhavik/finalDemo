@@ -17,7 +17,7 @@ interface Application {
   name: string;
   email: string;
   phone: string;
-  roomid:string;
+  roomid: string;
   address: string;
   coverLetter: string;
   resume: {
@@ -183,11 +183,18 @@ const JobSeekerCard: React.FC<JobSeekerCardProps> = ({
   deleteApplication,
   openModal,
 }) => {
+  const truncateText = (text: string) => {
+    const maxLength = 12;
+    if (text?.length > maxLength) {
+      return text?.substring(0, maxLength) + "...";
+    }
+    return text;
+  };
   return (
     <div className="job-post job-post-list rounded shadow p-4 d-md-flex align-items-center justify-content-between position-relative">
-      <div className="d-flex align-items-center w-310px">
+      <div className="d-flex align-items-center w-130px">
         <div className="ms-3">
-          <span className="fw-bold">Name:</span> {element.name}
+          <span className="fw-bold">Name:</span> {truncateText(element.name)}
         </div>
       </div>
 
@@ -201,7 +208,8 @@ const JobSeekerCard: React.FC<JobSeekerCardProps> = ({
         </span>
         <span className="text-muted d-flex align-items-center fw-medium mt-md-2">
           <FiClock className="fea icon-sm me-1 align-middle" />
-          <span className="fw-bold">Job Seeker Application Status:</span> {element.roomid}
+          <span className="fw-bold">Job Seeker Application Status:</span>{" "}
+          {element.roomid}
         </span>
         <span className="text-muted d-flex align-items-center">
           <FiMapPin
@@ -217,7 +225,7 @@ const JobSeekerCard: React.FC<JobSeekerCardProps> = ({
       <div className="d-flex align-items-center justify-content-between d-md-block mt-2 mt-md-0 w-130px">
         <span className="d-flex fw-medium mt-md-2">
           <span className="fw-bold pr-3">
-            Cover Letter: {element.coverLetter}
+            Cover Letter: {truncateText(element.coverLetter)}
           </span>
         </span>
       </div>
@@ -241,8 +249,8 @@ const JobSeekerCard: React.FC<JobSeekerCardProps> = ({
   );
 };
 
-const EmployerCard:React.FC<any> = ({ element, openModal }) => {
-   const [newRoomId, setNewRoomId] = useState<string>(element.roomid);
+const EmployerCard: React.FC<any> = ({ element, openModal }) => {
+  const [newRoomId, setNewRoomId] = useState<string>(element.roomid);
 
   const handleRoomIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewRoomId(event.target.value);
@@ -264,7 +272,14 @@ const EmployerCard:React.FC<any> = ({ element, openModal }) => {
       toast.error(error.response.data.message);
       console.log("Error updating room ID");
     }
-  }
+  };
+  const truncateText = (text: string) => {
+    const maxLength = 12;
+    if (text?.length > maxLength) {
+      return text?.substring(0, maxLength) + "...";
+    }
+    return text;
+  };
   return (
     <>
       <div className="job-post job-post-list rounded shadow p-4 d-md-flex align-items-center justify-content-between position-relative">
@@ -306,7 +321,7 @@ const EmployerCard:React.FC<any> = ({ element, openModal }) => {
                 placeholder="Enter new room ID"
               />
               <button className="btn btn-primary mt-2" onClick={updateRoomId}>
-                 Job Jobseeker Request Status Edit
+                Job Jobseeker Request Status Edit
               </button>
             </div>
           </>
@@ -314,7 +329,7 @@ const EmployerCard:React.FC<any> = ({ element, openModal }) => {
         <div className="d-flex align-items-center justify-content-between d-md-block mt-2 mt-md-0 w-130px">
           <span className="d-flex fw-medium mt-md-2">
             <span className="fw-bold pr-3">
-              Cover Letter: {element.coverLetter}
+              Cover Letter: {truncateText(element.coverLetter)}
             </span>
           </span>
         </div>
@@ -382,7 +397,6 @@ export default MyApplications;
 //   const { isAuthorized } = useContext(Context);
 //   const router = useRouter();
 
-  
 //     const fetchData = async () => {
 //       try {
 //         if (user && user.role === "Employer") {
@@ -527,7 +541,7 @@ export default MyApplications;
 //   openModal,
 //   toggleAccept,
 //   accept,
-  
+
 // }) => {
 //   const [showRoomId, setShowRoomId] = useState<boolean>(false);
 

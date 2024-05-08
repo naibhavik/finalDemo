@@ -163,9 +163,9 @@ const PostJob: React.FC = () => {
                 <Select
                   value={category}
                   onChange={(e) => setCategory(e.target.value as string)}
-                  sx={{
-                    "& > :not(style)": { mr: 1, mt: 1 },
-                  }}
+                  // sx={{
+                  //   "& > :not(style)": { mr: 1, mt: 1 },
+                  // }}
                 >
                   <MenuItem value="">Select Category</MenuItem>
                   <MenuItem value="Graphics & Design">
