@@ -84,6 +84,44 @@ const Navbar: React.FC = () => {
               ChatApp
             </Link>
           </li>
+          {user && user.role === "Employer" && (
+            <>
+              <li>
+                <Link
+                  href="/videocall/homevideocall"
+                  onClick={() => setShow(false)}
+                >
+                  Videocall
+                </Link>
+              </li>
+              
+            </>
+          )}
+          {/* {user && user.role === "Job Seeker" && (
+            <>
+              <li>
+                <Link
+                  href="/videocall/:value/mainpagevideocall"
+                  onClick={() => setShow(false)}
+                >
+                  videocall
+                </Link>
+              </li>
+              <li>
+                <Link href="/job/me" onClick={() => setShow(false)}>
+                  View Your Jobs
+                </Link>
+              </li>
+            </>
+          )} */}
+          {/* <li>
+            <Link
+              href="/videocall/homevideocall"
+              onClick={() => setShow(false)}
+            >
+              Videocall
+            </Link>
+          </li> */}
           <li>
             <Link href="/job/getall" onClick={() => setShow(false)}>
               All Jobs
@@ -126,7 +164,7 @@ const Navbar: React.FC = () => {
           </li>
 
           <li>
-            <button onClick={handleLogout}>LOGOUT</button>
+            <button onClick={handleLogout}>Logout</button>
           </li>
         </ul>
         <div className="hamburger">

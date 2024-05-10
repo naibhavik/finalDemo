@@ -8,32 +8,32 @@ import axios from "axios"; // Import axios for making HTTP requests
 
 const Success: React.FC = () => {
   const router = useRouter();
-  const myuser = useSelector((state: any) => state.user);
-  console.log("this is user id",myuser)
+  // const myuser = useSelector((state: any) => state.user);
+  // console.log("this is user id",myuser)
   // const { user } = useContext(Context);
 
   // Function to update subscription status
-  const updateSubscriptionStatus = async () => {
-    try {
-      const { _id } = myuser;
-      // Make a request to your backend API to update subscription status
-      const response = await axios.put(
-        "http://localhost:4000/api/v1/user/updatesubscription",
-        { userId: _id }
-      );
+  // const updateSubscriptionStatus = async () => {
+  //   try {
+  //     const { _id } = myuser;
+  //     // Make a request to your backend API to update subscription status
+  //     const response = await axios.put(
+  //       "http://localhost:4000/api/v1/user/updatesubscription",
+  //       { userId: _id }
+  //     );
 
-      console.log("Success: " + JSON.stringify(response));
-      console.log("Subscription updated successfully");
-      toast.success("Jobseeker Status Successfully");
-    } catch (error) {
-      console.error("Error updating subscription:", error);
-    }
-  };
+  //     console.log("Success: " + JSON.stringify(response));
+  //     console.log("Subscription updated successfully");
+  //     toast.success("Jobseeker Status Successfully");
+  //   } catch (error) {
+  //     console.error("Error updating subscription:", error);
+  //   }
+  // };
 
-  useEffect(() => {
-    // Call the function to update subscription status when component mounts
-    updateSubscriptionStatus();
-  }, []); // Empty dependency array ensures this effect runs only once, similar to componentDidMount
+  // useEffect(() => {
+  //   // Call the function to update subscription status when component mounts
+  //   updateSubscriptionStatus();
+  // }, []); // Empty dependency array ensures this effect runs only once, similar to componentDidMount
 
   const handlePaymentSuccess = () => {
     router.push("/");

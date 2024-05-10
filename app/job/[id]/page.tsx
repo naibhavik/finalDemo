@@ -66,7 +66,7 @@ const JobDetails: React.FC<Props> = (props) => {
           backgroundImage: "url('/images/hero/bg.jpg')",
           backgroundPosition: "top",
         }}
-      >
+       >
         <div className="bg-overlay bg-gradient-overlay"></div>
         <div className="container">
           <div className="row mt-5 justify-content-center">
@@ -106,7 +106,7 @@ const JobDetails: React.FC<Props> = (props) => {
             </Typography>
           </div>
 
-          <div className="job-details-container mt-5 mb-10 gap-8 w-30">
+          <div className="job-details-container relative mt-5 mb-10 gap-8 w-30">
             <div className=" h-[300px] w-[500px] rounded shadow p-4 ml-8 ">
               <Typography>
                 <span className="bold">Title:</span> <span>{job.title}</span>
@@ -151,10 +151,10 @@ const JobDetails: React.FC<Props> = (props) => {
               {user && user.role === "Employer" ? (
                 <></>
               ) : (
-                // <button className="mt-3 text-white bg-black h-9 w-24 rounded-lg">
+                // <button className="mt-3 text-white bg-black h-9 w-24 rounded-lg"
                 <Link
-                  className="mt-3 text-white bg-black h-9 w-24 rounded-md"
                   href={`/application/${job._id}`}
+                  className="btn btn-sm btn-primary max-w-fit ms-md-1"
                 >
                   Apply Now
                 </Link>
