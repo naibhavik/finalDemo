@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Button, CircularProgress } from "@material-ui/core";
@@ -9,8 +9,8 @@ const stripePromise = loadStripe(
 );
 
 const SubscriptionPage: React.FC = () => {
-    const userid = useSelector((state: any) => state.user._id);
-    console.log("this is user id",userid)
+  const userid = useSelector((state: any) => state.user._id);
+  console.log("this is user id", userid);
   const [loading, setLoading] = useState<boolean>(false);
 
   const handlePayment = async (subScriptionType: string) => {
@@ -25,22 +25,25 @@ const SubscriptionPage: React.FC = () => {
           body: JSON.stringify({ subScriptionType }), // Assuming you provide the user's email
         }
       );
-        await fetch(
-          "http://localhost:4000/api/v1/create-checkout-session/paymentsuccess",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ subScriptionType, userid }), // Assuming you provide the user's email
-          }
-        );
+      await fetch(
+        "http://localhost:4000/api/v1/create-checkout-session/paymentsuccess",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ subScriptionType, userid }), // Assuming you provide the user's email
+        }
+      );
 
       if (!response.ok) {
+        console.log("1====" + JSON.stringify(response));
         throw new Error("Failed to create checkout session");
       }
 
       const session = await response.json();
 
-      const stripe: any = await stripePromise;
+      const stripe: any = await stripePromise.catch((e) => {
+        console.log(e);
+      });
       const result = await stripe.redirectToCheckout({ sessionId: session.id });
 
       if (result.error) {
@@ -144,7 +147,6 @@ const SubscriptionPage: React.FC = () => {
 };
 
 export default SubscriptionPage;
-
 
 // "use client";
 // import React, { useState, useContext, useEffect } from "react";

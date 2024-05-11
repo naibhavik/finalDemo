@@ -34,7 +34,7 @@ const RoomPage:React.FC<Props> = (props) => {
         sharedLinks: [
           {
             name: "Copy Link",
-            url: `http://localhost:3000/videocall/mainpagevidocall${value}`,
+            url: `http://localhost:3000/videocall/mainpagevideocall/${value}`,
           },
         ],
         scenario: {

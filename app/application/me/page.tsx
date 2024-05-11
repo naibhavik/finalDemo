@@ -42,6 +42,8 @@ const MyApplications: React.FC = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [resumeImageUrl, setResumeImageUrl] = useState<string>("");
   const [accept, setAccept] = useState<boolean>(true);
+  // const [meetingId, setMeetingId]= useState<string>("")
+    // const [email, setEmail] = useState<string>("");
 
   const { isAuthorized } = useContext(Context);
   const router = useRouter();
@@ -97,6 +99,8 @@ const MyApplications: React.FC = () => {
       console.log("this is error");
     }
   };
+  
+
 
   const openModal = (imageUrl: string) => {
     setResumeImageUrl(imageUrl);
@@ -250,13 +254,20 @@ const JobSeekerCard: React.FC<JobSeekerCardProps> = ({
 };
 
 const EmployerCard: React.FC<any> = ({ element, openModal }) => {
-  const [newRoomId, setNewRoomId] = useState<string>(element.jobseekerstatus);
+  const [newRoomId, setNewRoomId] = useState<string>("Pending");
+  const [showMailModal, setShowMailModal] = useState(false);
+  const [meetingId, setMeetingId] = useState("");
+  const [mydate, setMydate] = useState("");
+     const [email, setEmail] = useState<string>("");
 
-  const handleRoomIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleRoomIdChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setNewRoomId(event.target.value);
   };
 
-  const updateRoomId = async () => {
+  console.log("status", newRoomId);
+  const handleStatusChange = async () => {
     try {
       const res = await axios.put(
         `http://localhost:4000/api/v1/application/updateRoomId/${element._id}`,
@@ -267,12 +278,37 @@ const EmployerCard: React.FC<any> = ({ element, openModal }) => {
       if (res.data.success) {
         toast.success("Room ID updated successfully");
         // You may want to update the application in the state here
+        if (newRoomId === "Approved") {
+          // Show the mail modal if the status is approved
+          setShowMailModal(true);
+        }
       }
     } catch (error: any) {
       toast.error(error.response.data.message);
       console.log("Error updating room ID");
     }
   };
+   const handleApplication = async (e: React.FormEvent) => {
+     e.preventDefault();
+     try {
+       const { data } = await axios.post(
+         "http://localhost:4000/schedulemeeting",
+         { meetingId, email, mydate },
+         {
+           withCredentials: true,
+           headers: {
+             "Content-Type": "application/json",
+           },
+         }
+       );
+       toast.success(data.message);
+       setShowMailModal(false); // Close the modal after successful submission
+     } catch (error: any) {
+       toast.error(error.response?.data.message || "An error occurred");
+       console.log("Error scheduling meeting and sending mail");
+     }
+   };
+
   const truncateText = (text: string) => {
     const maxLength = 12;
     if (text?.length > maxLength) {
@@ -305,22 +341,32 @@ const EmployerCard: React.FC<any> = ({ element, openModal }) => {
               Address:
               {element.address}
             </span>
+
             <span className="text-muted d-flex align-items-center fw-medium mt-md-2">
               <FiClock className="fea icon-sm me-1 align-middle" />
-              <span className="fw-bold">Application Status of Job Seeker:</span>
-              {element.roomid}
+              <span className="fw-bold">
+                Application Status of Job Seeker:
+              </span>{" "}
+              <select
+                value={newRoomId}
+                onChange={(e) => {
+                  setNewRoomId(e.target.value);
+                }}
+              >
+                {["Pending", "Approved", "Rejected"].map((status) => (
+                  <option key={status} value={status}>
+                    {status}
+                  </option>
+                ))}
+              </select>
             </span>
           </span>
           <>
             <div className="text-center">
-              <input
-                type="text"
-                className="form-control"
-                value={newRoomId}
-                onChange={handleRoomIdChange}
-                placeholder="Enter new room ID"
-              />
-              <button className="btn btn-primary mt-2" onClick={updateRoomId}>
+              <button
+                className="btn btn-primary mt-2"
+                onClick={handleStatusChange}
+              >
                 Job Jobseeker Request Status Edit
               </button>
             </div>
@@ -342,6 +388,50 @@ const EmployerCard: React.FC<any> = ({ element, openModal }) => {
           />
         </div>
       </div>
+
+      {newRoomId === "Approved" && (
+        <button
+          className="btn btn-primary mt-2"
+          onClick={() => setShowMailModal(true)}
+        >
+          Send to Mail
+        </button>
+      )}
+      {/* Mail modal */}
+      {showMailModal && (
+        <div className="mail-modal">
+          <form onSubmit={handleApplication}>
+            <input
+              type="text"
+              value={meetingId}
+              onChange={(e) => setMeetingId(e.target.value)}
+              placeholder="Enter your meeting ID"
+            />
+            <input
+              type="datetime-local"
+              value={mydate}
+              onChange={(e) => setMydate(e.target.value)}
+            />
+            <input
+              type="text"
+              value={email}
+              placeholder="Enter Jobseeker email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <button type="submit" className="btn btn-primary">
+              Schedule and Send Mail
+            </button>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => setShowMailModal(false)}
+            >
+              Cancel
+            </button>
+          </form>
+        </div>
+      )}
+
       <ScrollTop />
     </>
   );
