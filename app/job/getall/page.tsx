@@ -55,7 +55,7 @@ const Jobs: React.FC = () => {
   }, [isAuthorized, router]);
 
   useEffect(() => {
-    // Filter jobs based on search query
+  
     const filtered = jobs.filter((job) =>
       job.category.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -63,7 +63,7 @@ const Jobs: React.FC = () => {
   }, [jobs, searchQuery]);
 
   useEffect(() => {
-    // Filter jobs based on search location
+    
     const filtered = jobs.filter((job) =>
       job.location.toLowerCase().includes(searchLocation.toLowerCase())
     );
@@ -108,7 +108,7 @@ const Jobs: React.FC = () => {
       <section className="jobs page">
         <div className="container">
           <h1 className="header">ALL AVAILABLE JOBS</h1>
-          {/* Search input fields */}
+         
           <div className="grid grid-cols-2 gap-10">
             <input
               type="text"
@@ -133,13 +133,7 @@ const Jobs: React.FC = () => {
                   <div className="col-12" key={index}>
                     <div className="job-post job-post-list rounded shadow p-4 d-md-flex align-items-center justify-content-between position-relative">
                       <div className="d-flex align-items-center w-310px">
-                        {/* <Image
-                          src={jobData.}
-                          width={65}
-                          height={65}
-                          className="avatar avatar-small rounded shadow p-3 bg-white"
-                          alt=""
-                        /> */}
+                     
 
                         <div className="ms-3">
                           <Link

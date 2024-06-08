@@ -7,7 +7,6 @@ import { FaPencilAlt } from "react-icons/fa";
 import { FaPhoneFlip } from "react-icons/fa6";
 import axios from "axios";
 import { toast } from "react-toastify";
- // Assuming ContextProps is exported from layout.tsx
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -43,7 +42,7 @@ const Register: React.FC = () => {
       setPhone("");
       setRole("");
       setIsAuthorized(true);
-      router.push("/"); // Navigate to home page after successful registration
+      router.push("/"); 
     } catch (error: any) {
       toast.error(error.response.data.message);
       console.log("this is error");
@@ -51,7 +50,7 @@ const Register: React.FC = () => {
   };
 
   if (isAuthorized) {
-    router.push("/"); // Redirect to home page if already authorized
+    router.push("/");
     return null;
   }
 
@@ -80,7 +79,7 @@ const Register: React.FC = () => {
               <div>
                 <input
                   type="text"
-                  placeholder="Zeeshan"
+                  placeholder="Name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -92,7 +91,7 @@ const Register: React.FC = () => {
               <div>
                 <input
                   type="email"
-                  placeholder="zk@gmail.com"
+                  placeholder="Enter Your Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />

@@ -3,10 +3,10 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FiClock, FiCalendar } from "./assets/icons/vander";
-import { BlogData } from "./data" // Assuming you have a type/interface for blog data
+import { BlogData } from "./data"
 
 interface Props {
-  blogData: BlogData[]; // Assuming BlogData is an interface or type for the structure of each blog item
+  blogData: BlogData[]; 
 }
 
 const Blog: React.FC<Props> = ({ blogData }) => {

@@ -18,23 +18,23 @@ interface User {
   email: string;
   phone: number;
   role: string;
-  // Add any other properties if needed
+ 
 }
 
 interface ContextProps {
   isAuthorized: boolean;
   subcription:boolean;
   setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>;
-  user: User; // Updated to use the User interface
+  user: User; 
   setUser: React.Dispatch<React.SetStateAction<User>>;
 }
 
-// Define the context with initial values
+
 export const Context = createContext<ContextProps>({
   isAuthorized: false,
   subcription:false,
   setIsAuthorized: () => {},
-  user: { _id: "", name: "", email: "", phone: 0, role: "" }, // Initialize user with empty values
+  user: { _id: "", name: "", email: "", phone: 0, role: "" }, 
   setUser: () => {},
 });
 
@@ -51,7 +51,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     email: "",
     phone: 0,
     role: "",
-  }); // Initialize user with empty values
+  }); 
   const router = useRouter();
 
   useEffect(() => {

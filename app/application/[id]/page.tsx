@@ -18,13 +18,11 @@ const Application: React.FC<ApplicationProps> = (props) => {
   const [coverLetter, setCoverLetter] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [address, setAddress] = useState<string>("");
-  // const [roomid, setRoomid] = useState<string>("");
   const [resume, setResume] = useState<File | null>(null);
 
   const { isAuthorized, user } = useContext(Context);
   const router = useRouter();
 
-  // Function to handle file input changes
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const resumeFile = event.target.files?.[0];
     if (resumeFile) {
@@ -41,7 +39,6 @@ const Application: React.FC<ApplicationProps> = (props) => {
     formData.append("email", email);
     formData.append("phone", phone);
     formData.append("address", address);
-    // formData.append("roomid", roomid);
     formData.append("coverLetter", coverLetter);
     if (resume) {
       formData.append("resume", resume);
@@ -63,7 +60,6 @@ const Application: React.FC<ApplicationProps> = (props) => {
       setEmail("");
       setCoverLetter("");
       setPhone("");
-      // setRoomid("");
       setAddress("");
       setResume(null);
       toast.success(data.message);
@@ -178,7 +174,7 @@ const Application: React.FC<ApplicationProps> = (props) => {
             type="submit"
             variant="contained"
             color="primary"
-            className="mt-4 mb-2" // Adjust the margin-top value as needed
+            className="mt-4 mb-2"
           >
             Send Application
           </Button>

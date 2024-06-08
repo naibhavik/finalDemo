@@ -25,7 +25,7 @@ export default function App() {
       dispatch(addUserSuccess(response.data.user));
       setUser(response.data.user);
 
-      // console.log("user data", response.data.user);
+    
       setIsAuthorized(true);
       setLoading(true);
     } catch (error) {

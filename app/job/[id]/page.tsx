@@ -66,7 +66,7 @@ const JobDetails: React.FC<Props> = (props) => {
           backgroundImage: "url('/images/hero/bg.jpg')",
           backgroundPosition: "top",
         }}
-       >
+      >
         <div className="bg-overlay bg-gradient-overlay"></div>
         <div className="container">
           <div className="row mt-5 justify-content-center">
@@ -106,40 +106,46 @@ const JobDetails: React.FC<Props> = (props) => {
             </Typography>
           </div>
 
-          <div className="job-details-container relative mt-5 mb-10 gap-8 w-30">
-            <div className=" h-[300px] w-[500px] rounded shadow p-4 ml-8 ">
+          <div className="job-details-container relative mt-5 mb-10 gap-8 w-30 fixed">
+            <div className=" h-[400px] w-[500px] rounded shadow p-4 ml-8 ">
+              {/* <div className="mb-2">
+                <Typography>
+                  <span className="bold">Title:</span> <span>{job.title}</span>
+                </Typography>
+              </div> */}
               <Typography>
-                <span className="bold">Title:</span> <span>{job.title}</span>
+                <span className="font-bold text-lg">Title:</span>{" "}
+                <span>{job.title}</span>
               </Typography>
               <Typography>
-                <span className="bold">Category:</span>{" "}
+                <span className="font-bold text-lg">Category:</span>{" "}
                 <span>{job.category}</span>
               </Typography>
               <Typography>
-                <span className="bold">Country:</span>{" "}
+                <span className="font-bold text-lg">Country:</span>{" "}
                 <span>{job.country}</span>
               </Typography>
               <Typography>
-                <span className="bold">City:</span> <span>{job.city}</span>
+                <span className="font-bold text-lg">City:</span> <span>{job.city}</span>
               </Typography>
               <Typography>
-                <span className="bold">Experience:</span>{" "}
+                <span className="font-bold text-lg">Experience:</span>{" "}
                 <span>{job.experience}</span>
               </Typography>
               <Typography>
-                <span className="bold">Location:</span>{" "}
+                <span className="font-bold text-lg">Location:</span>{" "}
                 <span>{job.location}</span>
               </Typography>
               <Typography>
-                <span className="bold">Description:</span>{" "}
+                <span className="font-bold text-lg">Description:</span>{" "}
                 <span>{job.description}</span>
               </Typography>
               <Typography>
-                <span className="bold">Job Posted On:</span>{" "}
+                <span className="font-bold text-lg">Job Posted On:</span>{" "}
                 <span>{job.jobPostedOn}</span>
               </Typography>
               <Typography>
-                <span className="bold">Salary:</span>{" "}
+                <span className="font-bold text-lg">Salary:</span>{" "}
                 {job.fixedSalary ? (
                   <span>{job.fixedSalary}</span>
                 ) : (
@@ -151,14 +157,12 @@ const JobDetails: React.FC<Props> = (props) => {
               {user && user.role === "Employer" ? (
                 <></>
               ) : (
-                // <button className="mt-3 text-white bg-black h-9 w-24 rounded-lg"
                 <Link
                   href={`/application/${job._id}`}
                   className="btn btn-sm btn-primary max-w-fit ms-md-1"
                 >
                   Apply Now
                 </Link>
-                // </button>
               )}
             </div>
           </div>

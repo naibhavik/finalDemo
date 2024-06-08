@@ -41,17 +41,12 @@ const Login: React.FC = () => {
       setIsAuthorized(true);
       console.log("local", mylocal);
 
-      router.push("/"); // Redirect to home page after successful login
+      router.push("/");
     } catch (error: any) {
       toast.error(error.response.data.message);
       console.log("this is error");
     }
   };
-
-  // if (isAuthorized) {
-  //   router.push("/"); // Redirect to home page if already authorized
-  //   return null;
-  // }
 
   return (
     <>
@@ -78,7 +73,7 @@ const Login: React.FC = () => {
               <div>
                 <input
                   type="email"
-                  placeholder="zk@gmail.com"
+                  placeholder="Enter Your Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -98,13 +93,16 @@ const Login: React.FC = () => {
               </div>
             </div>
             <button type="submit">Login</button>
+            <div>
+
             <p>
               forgotpassword{" "}
-              <Link href="/forgotpassword"> forgotpassword</Link>
+              <Link href="/forgotpassword"> Forgotpassword Now</Link>
             </p>
             <p>
               Dont have an account? <Link href="/register">Register Now</Link>
             </p>
+            </div>
           </form>
         </div>
         <div className="banner">

@@ -5,7 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import axios from "axios";
-// import toast from "react-hot-toast";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Context } from "@/app/layout";
 import Image from "next/image";
@@ -13,34 +12,13 @@ import { useSelector } from "react-redux";
 
 const Navbar: React.FC = () => {
   const [show, setShow] = useState<boolean>(false);
-  const { isAuthorized, setIsAuthorized, user, setUser }: any =
+  const { isAuthorized, setIsAuthorized,user, setUser }: any =
     useContext(Context); 
   const myuser = useSelector((state: any) => state.user);
   setUser(myuser);
   console.log("this is my user", myuser);
   const router = useRouter();
-  // const fetchUser = async () => {
-  //   try {
-  //     const response = await axios.get<{ user: any }>(
-  //       "http://localhost:4000/api/v1/user/getuser",
-  //       {
-  //         withCredentials: true,
-  //       }
-  //     );
-  //     setUser(response.data.user);
-  //     console.log("user data", response.data.user);
-  //     setIsAuthorized(true);
-  //   } catch (error) {
-  //     setIsAuthorized(false);
-  //   }
-  // };
-  // useEffect(() => {
-  //   if (isAuthorized) {
-  //     fetchUser();
-  //   } else {
-  //     router.push("/login");
-  //   }
-  // }, [isAuthorized, setUser, setIsAuthorized]);
+  
 
   const handleLogout = async () => {
     try {
@@ -60,8 +38,11 @@ const Navbar: React.FC = () => {
       setIsAuthorized(true);
     }
   };
-  if (!isAuthorized) {
-    router.push("/login"); // Redirect to home page if already authorized
+   const checkIsauthorization = localStorage.getItem("isAuthorized");
+  //  setIsAuthorized(checkIsauthorization);
+  if (!checkIsauthorization || checkIsauthorization === "false") {
+    router.push("/login");
+    setIsAuthorized(false);
     return null;
   }
    console.log("check", isAuthorized);
@@ -70,20 +51,16 @@ const Navbar: React.FC = () => {
     <nav className={isAuthorized ? "navbarShow" : "navbarHide"}>
       <div className="container">
         <div className="logo">
-          {/* You need to use Next.js Image component to import images */}
           <img src="/JobZee-logos__white.png" alt="logo" />
         </div>
         <ul className={!show ? "menu" : "show-menu menu"}>
+          {/* <li className="text-white">{user.name}</li> */}
           <li>
             <Link href="/" onClick={() => setShow(false)}>
               Home
             </Link>
           </li>
-          <li>
-            <Link href="/chat" onClick={() => setShow(false)}>
-              ChatApp
-            </Link>
-          </li>
+
           {user && user.role === "Employer" && (
             <>
               <li>
@@ -94,34 +71,9 @@ const Navbar: React.FC = () => {
                   Videocall
                 </Link>
               </li>
-              
             </>
           )}
-          {/* {user && user.role === "Job Seeker" && (
-            <>
-              <li>
-                <Link
-                  href="/videocall/:value/mainpagevideocall"
-                  onClick={() => setShow(false)}
-                >
-                  videocall
-                </Link>
-              </li>
-              <li>
-                <Link href="/job/me" onClick={() => setShow(false)}>
-                  View Your Jobs
-                </Link>
-              </li>
-            </>
-          )} */}
-          {/* <li>
-            <Link
-              href="/videocall/homevideocall"
-              onClick={() => setShow(false)}
-            >
-              Videocall
-            </Link>
-          </li> */}
+
           <li>
             <Link href="/job/getall" onClick={() => setShow(false)}>
               All Jobs
@@ -135,13 +87,6 @@ const Navbar: React.FC = () => {
                 : "My Application"}
             </Link>
           </li>
-          {user && user.role === "Job Seeker" && (
-            <li>
-              <Link href="/membership" onClick={() => setShow(false)}>
-                Membership
-              </Link>
-            </li>
-          )}
 
           {user && user.role === "Employer" && (
             <>
@@ -158,13 +103,31 @@ const Navbar: React.FC = () => {
             </>
           )}
           <li>
+            <Link href="/membership" onClick={() => setShow(false)}>
+              Membership
+            </Link>
+          </li>
+          {user && user.role === "Job Seeker" && (
+            <li>
+              <Link href="/aboutus" onClick={() => setShow(false)}>
+                Aboutus
+              </Link>
+            </li>
+          )}
+          <li>
             <Link href="/contactus" onClick={() => setShow(false)}>
               Contactus
             </Link>
           </li>
 
           <li>
-            <button onClick={handleLogout}>Logout</button>
+            <span className="circle text-white">
+              {user.name.charAt(0).toUpperCase()}
+            </span>
+            <span className="text-white">{user.name}</span>
+            <button className="ml-1" onClick={handleLogout}>
+              Logout
+            </button>
           </li>
         </ul>
         <div className="hamburger">

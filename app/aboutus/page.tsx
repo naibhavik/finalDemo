@@ -2,7 +2,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-// import About from "../componants/aboutUs";
 
 
 import { servicesData, teamData } from "../../components/NewJob/data";

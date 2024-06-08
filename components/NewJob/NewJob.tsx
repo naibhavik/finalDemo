@@ -4,8 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-// import ScrollTop from "../componants/scrollTop";
-// import Blog from "./blog";
 import Companies from "./companies";
 import AboutUs from "./aboutUs";
 import Counter from "./counter";
@@ -71,7 +69,7 @@ const NewJob: React.FC = () => {
     }
   }, [isAuthorized, router]);
   useEffect(() => {
-    // Filter jobs based on search query
+  
     const filtered = jobs.filter((job) =>
       job.category.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -104,7 +102,7 @@ const NewJob: React.FC = () => {
                   years.
                 </p>
 
-                <div className="d-md-flex justify-content-between align-items-center bg-white shadow rounded p-2 mt-4">
+                {/* <div className="d-md-flex justify-content-between align-items-center bg-white shadow rounded p-2 mt-4">
                   <form className="card-body text-start">
                     <div className="registration-form text-dark text-start">
                       <div className="row g-lg-0">
@@ -140,11 +138,11 @@ const NewJob: React.FC = () => {
                       </div>
                     </div>
                   </form>
-                </div>
+                </div> */}
                 <div className="mt-2">
                   <span className="text-white-50">
                     <span className="text-white">Popular Searches :</span>{" "}
-                    Designer, Developer, Web, IOS, PHP Senior Engineer
+                    Mern Stack Developer,Designer, Developer, Web, IOS, PHP Senior Engineer
                   </span>
                 </div>
               </div>
@@ -161,8 +159,6 @@ const NewJob: React.FC = () => {
                   className="img-fluid rounded"
                   alt=""
                 />
-
-                {/* <VideoModal /> */}
               </div>
             </div>
           </div>
@@ -182,9 +178,10 @@ const NewJob: React.FC = () => {
           </svg>
         </div>
       </div>
+      <br/>
+      <Counter />
       <section className="section">
-        <Counter />
-        <div className="container mt-100 mt-60">
+        <div className="container">
           <div className="row justify-content-center mb-4 pb-2">
             <div className="col-12">
               <div className="section-title text-center">
@@ -197,6 +194,41 @@ const NewJob: React.FC = () => {
               </div>
             </div>
           </div>
+          <div className="d-md-flex justify-content-between align-items-center bg-white shadow rounded p-2 mt-4">
+            <form className="card-body text-start">
+              <div className="registration-form text-dark text-start">
+                <div className="row g-lg-0">
+                  <div className="col-lg-9 col-md-8 col-12">
+                    <div className="mb-3 mb-sm-0">
+                      <label className="form-label d-none fs-6">Search :</label>
+                      <div className="filter-search-form position-relative filter-border">
+                        <FiSearch className="fea icon-20 icons" />
+                        <input
+                          name="name"
+                          type="text"
+                          placeholder="Search by category..."
+                          value={searchQuery}
+                          onChange={handleSearchInputChange}
+                          className="form-control filter-input-box ml-6 bg-light border-0"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-3 col-md-4 col-12">
+                    <input
+                      type="submit"
+                      // id="search"
+                      name="search"
+                      style={{ height: "60px" }}
+                      className="btn btn-primary w-100"
+                      // value="Search"
+                    />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
 
           <div className="row row-cols-lg-5 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4 mt-0">
             {filteredJobs.slice(0, 6).map((item, index) => {
@@ -206,7 +238,6 @@ const NewJob: React.FC = () => {
                     <h5 className="mb-1">{item.category}</h5>
                     <p className="text-muted para mb-2">{item.experience}</p>
                     <p className="text-muted para mb-2">{item.country}</p>
-                    {/* <p className="text-muted para mb-2">{item.location}</p> */}
                     <p className="text-muted para mb-2">
                       {item.salaryFrom} to {item.salaryTo}
                     </p>
@@ -232,6 +263,7 @@ const NewJob: React.FC = () => {
             </div>
           </div>
         </div>
+        {/* <Counter /> */}
 
         <div className="container mt-100 mt-60">
           <div className="row justify-content-center mb-4 pb-2">
@@ -313,7 +345,7 @@ const NewJob: React.FC = () => {
           <Companies />
         </div>
 
-        <div className="container mt-100 mt-60">
+        {/* <div className="container mt-100 mt-60">
           <div className="row justify-content-center">
             <div className="col">
               <div className="section-title text-center mb-4 pb-2">
@@ -326,9 +358,7 @@ const NewJob: React.FC = () => {
               </div>
             </div>
           </div>
-
-          {/* <Blog/> */}
-        </div>
+        </div> */}
       </section>
       <ScrollTop />
     </>

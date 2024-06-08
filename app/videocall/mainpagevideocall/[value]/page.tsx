@@ -1,8 +1,9 @@
-"use client"
+"use client";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useContext } from "react";
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
-
+import { Context } from "@/app/layout";
+import { useSelector } from "react-redux";
 
 interface Props {
   params: {
@@ -10,30 +11,48 @@ interface Props {
   };
 }
 
-const RoomPage:React.FC<Props> = (props) => {
+const RoomPage: React.FC<Props> = (props) => {
+  const { isAuthorized, setIsAuthorized, user, setUser }: any =
+    useContext(Context);
+  const myuser = useSelector((state: any) => state.user);
+  setUser(myuser);
   const router = useRouter();
+  console.log("membership", user.subscriptionEndTime);
+  console.log("isSubscribed", user.isSubscribed);
   const { value } = props.params;
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const myMeeting = async (element: HTMLDivElement | null) => {
-    //   if (!element || !roomId) return;
+    const currentDate = new Date().toString();
+    const subscriptionEndTime = new Date(user.subscriptionEndTime).toString();
 
-      const appID = 236123164;
-      const serverSecret = "e012672620d14a7bbf6a004fd006b8c1";
+    console.log("Current Date", currentDate);
+    console.log("Subscription End Date", subscriptionEndTime);
+
+    if (
+      new Date(currentDate) > new Date(subscriptionEndTime) ||
+      user.isSubscribed === false
+    ) {
+      router.push("/membership");
+      return;
+    }
+
+    const myMeeting = async (element: HTMLDivElement | null) => {
+      const appID = parseInt(process.env.NEXT_PUBLIC_APP_ID || "0");
+      const serverSecret = process.env.NEXT_PUBLIC_SERVER_SECRET || "";
       const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
         appID,
         serverSecret,
         value.toString(),
         Date.now().toString(),
-        "nai bhavik"
+        "Enter your name"
       );
+
       const zc = ZegoUIKitPrebuilt.create(kitToken);
       zc.joinRoom({
         container: element,
         sharedLinks: [
           {
-            name: "Copy Link",
             url: `http://localhost:3000/videocall/mainpagevideocall/${value}`,
           },
         ],
@@ -62,7 +81,7 @@ const RoomPage:React.FC<Props> = (props) => {
             <div className="col-12">
               <div className="title-heading text-center">
                 <h5 className="heading fw-semibold mb-0 sub-heading text-white title-dark">
-                Vidoecall Section
+                  Videocall Section
                 </h5>
               </div>
             </div>

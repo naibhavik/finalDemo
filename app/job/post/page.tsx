@@ -104,7 +104,7 @@ const PostJob: React.FC = () => {
         }
       );
       toast.success(res.data.message);
-      router.push("/job/post"); // Redirect to home after successful post
+      router.push("/job/post");
     } catch (err: any) {
       toast.error(err.response.data.message);
       console.log("this is error", err);
@@ -163,9 +163,6 @@ const PostJob: React.FC = () => {
                 <Select
                   value={category}
                   onChange={(e) => setCategory(e.target.value as string)}
-                  // sx={{
-                  //   "& > :not(style)": { mr: 1, mt: 1 },
-                  // }}
                 >
                   <MenuItem value="">Select Category</MenuItem>
                   <MenuItem value="Graphics & Design">

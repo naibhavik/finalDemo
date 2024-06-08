@@ -19,7 +19,7 @@ interface Job {
   fixedSalary?: string;
   salaryFrom?: string;
   salaryTo?: string;
-  expired: string; // Changed to string type
+  expired: string; 
 }
 
 const MyJobs: React.FC = () => {
@@ -53,11 +53,7 @@ const MyJobs: React.FC = () => {
     }
   }, [isAuthorized, router]);
 
-  // useEffect(() => {
-  //   if (!isAuthorized || (user && user.role !== "Employer")) {
-  //     router.push("/");
-  //   }
-  // }, [isAuthorized, user]);
+  
 
   const handleEnableEdit = (jobId: string) => {
     setEditingMode(jobId);
@@ -103,7 +99,7 @@ const MyJobs: React.FC = () => {
     field: keyof Job,
     value: string | boolean
   ) => {
-    // Convert boolean value to string if the field is 'expired'
+    
     const convertedValue = field === "expired" ? String(value) : value;
 
     setMyJobs((prevJobs) =>

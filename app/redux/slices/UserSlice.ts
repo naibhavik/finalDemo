@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface UserState {
   isLoading: boolean;
   isError: boolean;
-  user: any; // You might want to define a type for your user object
+  user: any; 
 }
 
 const initialState: UserState = {
@@ -22,8 +22,8 @@ const userSlice = createSlice({
     },
     addUserSuccess: (state, action: PayloadAction<any>) => {
       state.isLoading = false;
-      console.log("YYYYYYY");
-      console.log("====",action.payload);
+      // console.log("YYYYYYY");
+      // console.log("====",action.payload);
       
       state.user = action.payload;
     },

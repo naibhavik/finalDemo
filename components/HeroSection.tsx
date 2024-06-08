@@ -41,7 +41,7 @@ const HeroSection: React.FC = () => {
         <div className="container">
           <div className="title">
             <h3>Find a job that suits your interests and skills</h3>
-            {/* <h1>your interests and skills</h1> */}
+           
             <p>
               Join our team and embark on a journey where passion meets purpose.
               We are on the lookout for a dedicated professional who is ready to

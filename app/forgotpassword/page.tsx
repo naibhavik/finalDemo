@@ -4,7 +4,7 @@ import { FaRegUser } from "react-icons/fa";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { RiLock2Fill } from "react-icons/ri";
 import axios from "axios";
-import { toast } from "react-toastify"; // Corrected import
+import { toast } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css";
 
 import Image from "next/image";
@@ -14,8 +14,6 @@ import { Context } from "../layout";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("naibhavik68@gmail.com");
-//   const [password, setPassword] = useState<string>("Bhavik@123");
-//   const [role, setRole] = useState<string>("Employer");
   const router = useRouter();
 
   const { isAuthorized, setIsAuthorized }: any = useContext(Context);
@@ -36,21 +34,14 @@ const Login: React.FC = () => {
       toast.success(data.message);
       setEmail("");
      
-    //   const mylocal = localStorage.setItem("isAuthorized", "true");
-    //   setIsAuthorized(true);
-    //   console.log("local", mylocal);
 
-      router.push("/login"); // Redirect to home page after successful login
+      router.push("/login"); 
     } catch (error: any) {
       toast.error(error.response.data.message);
       console.log("this is error");
     }
   };
 
-  // if (isAuthorized) {
-  //   router.push("/"); // Redirect to home page if already authorized
-  //   return null;
-  // }
 
   return (
     <>

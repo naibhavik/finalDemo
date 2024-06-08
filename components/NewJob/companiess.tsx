@@ -47,13 +47,7 @@ export default function Companies(): JSX.Element {
                 <i className="mdi mdi-play mdi-24px text-primary"></i>
               </Link>
             </div>
-            {/* <ModalVideo
-              channel="youtube"
-              youtube={{ mute: 0, autoplay: 0 }}
-              isOpen={isOpen}
-              videoId="yba7hPeTSjk"
-              onClose={() => setOpen(false)}
-            /> */}
+           
           </div>
         </div>
       </div>
