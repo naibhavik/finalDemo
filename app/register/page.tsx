@@ -36,6 +36,7 @@ const Register: React.FC = () => {
         }
       );
       toast.success(data.message);
+       localStorage.setItem("isAuthorized", "true");
       setName("");
       setEmail("");
       setPassword("");
@@ -48,6 +49,7 @@ const Register: React.FC = () => {
       console.log("this is error");
     }
   };
+ 
 
   if (isAuthorized) {
     router.push("/");
