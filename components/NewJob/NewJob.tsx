@@ -5,7 +5,7 @@ import Image from "next/image";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Companies from "./companies";
-import AboutUs from "./aboutUs";
+import AboutUs from  "./aboutUs"
 import Counter from "./counter";
 
 import {

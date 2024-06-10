@@ -159,7 +159,7 @@ const PostJob: React.FC = () => {
             </Grid>
             <Grid item xs={12} md={6}>
               <FormControl fullWidth variant="outlined">
-                <InputLabel>Select Category</InputLabel>
+                <InputLabel className="mt-2">Select Category</InputLabel>
                 <Select
                   value={category}
                   onChange={(e) => setCategory(e.target.value as string)}
