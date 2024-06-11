@@ -2,9 +2,9 @@
 import { createContext, useState, useEffect, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { ToastContainer } from "react-toastify";
-import Footer from "@/components/Layout/Footer";
+import Footer from "@/components/Footer";
 import "./globals.css";
-import Navbar from "@/components/Layout/Navbar";
+import Navbar from "@/components/Navbar";
 import "../components/NewJob/assets/scss/style.scss";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";

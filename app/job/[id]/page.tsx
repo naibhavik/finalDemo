@@ -108,11 +108,6 @@ const JobDetails: React.FC<Props> = (props) => {
 
           <div className="job-details-container relative mt-5 mb-10 gap-8 w-30 fixed">
             <div className=" h-[400px] w-[500px] rounded shadow p-4 ml-8 ">
-              {/* <div className="mb-2">
-                <Typography>
-                  <span className="bold">Title:</span> <span>{job.title}</span>
-                </Typography>
-              </div> */}
               <Typography>
                 <span className="font-bold text-lg">Title:</span>{" "}
                 <span>{job.title}</span>
