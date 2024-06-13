@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import ResumeModal from "@/components/ResumeModal";
+import ResumeModal from "@/components/NewJob/ResumeModal";
 import { Context } from "@/app/layout";
 import {
   FiBookmark,

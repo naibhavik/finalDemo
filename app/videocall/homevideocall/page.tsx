@@ -1,11 +1,18 @@
 "use client"
+import { Context } from "@/app/layout";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useState,useContext } from "react";
 
 const HomePage = () => {
   const [value, setValue] = useState<string>("");
+    const { isAuthorized, setIsAuthorized, user, setUser }: any =
+      useContext(Context); 
+      console.log("this is my data",user)
   const router = useRouter();
+  if(user.role==='Job Seeker'){
+    router.push('/')
 
+  }
   const handleJoinRoom = useCallback(() => {
     router.push(`/videocall/mainpagevideocall/${value}`);
   }, [router, value]);
